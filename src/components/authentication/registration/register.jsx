@@ -367,6 +367,7 @@ const Register = () => {
               <button
                 onClick={() => {
                   //setActive()
+                  navigate("/profile")
                 }}
                 className="w-fit px-6 py-3 bg-[#017297] mb-3 hover:bg-[#1670d2] rounded-sm text-white flex justify-center items-center space-x-2 font-semibold"
               >
