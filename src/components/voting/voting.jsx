@@ -6,12 +6,13 @@ import MobileCard from "../landing/mobileCard";
 import Subscribe from "../landingUi/subscribe";
 import Footer from "../footer/footer";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import austin from '../../assets/png/austin.png'
 import next from '../../assets/png/next.png'
 import Profile from "./widget/profile";
 import VotingForm from "./widget/votingform";
 const Voting = () => {
+    const navigate = useNavigate()
     const [menu, showmenu] = useState(false)
     return (
         <div className="w-full h-full   font-light overflow-x-hidden">
@@ -50,7 +51,11 @@ const Voting = () => {
               <Link to="/">Talent</Link>
               <Link to="/contact">Contact</Link>
             </div>
-            <button className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
+            <button 
+               onClick={() => {
+                navigate("/register")
+              }}
+            className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
               Join us
             </button>
             <div

@@ -1,4 +1,4 @@
-import Register from "../components/authentication/register";
+import Register from "../components/authentication/registration/register";
 import Login from "../components/authentication/login";
 import ForgotPassword from "../components/authentication/resetpassword/forgotPassword"
 import Landing from "../components/landing/landing";

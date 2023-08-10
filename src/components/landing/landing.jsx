@@ -13,8 +13,10 @@ import FeedBack from "../landingUi/feedback";
 import OurBlog from "../landingUi/ourBlog";
 import Subscribe from "../landingUi/subscribe";
 import Footer from "../footer/footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Landing = () => {
+  const navigate = useNavigate()
     const [menu, showmenu] = useState(false)
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
@@ -32,7 +34,11 @@ const Landing = () => {
             <Link to="/">Talent</Link>
             <Link to="/contact">Contact</Link>
           </div>
-          <button className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
+          <button
+             onClick={() => {
+              navigate("/register")
+            }}
+          className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
             Join us
           </button>
           <div
