@@ -18,7 +18,11 @@ const EventDetail = () => {
           <div className="text-white  absolute inset-0 m-auto space-y-4 flex flex-col items-center w-fit h-fit ">
            <p className="font-bold text-lg sm:text-3xl">The Stage Time</p>
            <p className="text-center">A show brought to you by NextGen</p>
-           <button className="text-[#017297] bg-white rounded-sm px-4 sm:px-8 py-2">
+           <button
+           onClick={() => {
+            navigate("/join")
+           }}
+           className="text-[#017297] bg-white rounded-sm px-4 sm:px-8 py-2">
                 Join as a Contestant
               </button>
               <p className="text-center text-[#FFCC15]">Registration Ends by July 2023</p>

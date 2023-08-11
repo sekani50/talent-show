@@ -16,7 +16,7 @@ const FeedBack = () => {
               sint. Velit officia consequat duis enim velit mollit. Exercitation
               veniam consequat.”
             </div>
-            <div className="grid bg-gray-200 p-2 grid-cols-4 gap-">
+            <div className="grid rounded-sm bg-gray-200 p-2 grid-cols-4 gap-">
               <div className="w-[40px] h-[40px] rounded-full">
                 <img src={avatar} alt="" className="w-full h-full rounded-full" />
               </div>

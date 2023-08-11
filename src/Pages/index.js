@@ -8,6 +8,7 @@ import Events from "../components/events/events";
 import EventDetail from "../components/eventdetail/eventDetail";
 import Voting from "../components/voting/voting";
 import ManageAccount from "../components/manageaccount/manageAccount";
+import OnBoarding from "../components/onboarding/onBoarding";
 export {
   Register,
   Login,
@@ -18,6 +19,7 @@ export {
 EventDetail,
  Events,
  Voting,
- ManageAccount
+ ManageAccount,
+ OnBoarding
 
 };

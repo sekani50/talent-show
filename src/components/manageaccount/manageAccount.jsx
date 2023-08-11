@@ -7,13 +7,19 @@ import UpdateAccount from './accountUpdate'
 import MyEvents from './myEvents'
 import austin from '../../assets/png/austin.png'
 import vote from '../../assets/png/vote.png'
+import { useNavigate } from 'react-router-dom'
 const ManageAccount = () => {
     const [active, setactive] = useState(0)
     const [portfolio, setPortfolio] = useState('')
+    const navigate = useNavigate()
     return (
         <div className='w-full overflow-x-hidden '>
             <div className='bg-[#313133] flex justify-between items-center px-4 sm:px-10 py-2'>
-            <div className="w-[35px] sm:w-[50px] ">
+            <div
+            onClick={() => {
+              navigate("/")
+            }}
+             className="cursor-pointer w-[35px] sm:w-[50px] ">
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className='space-x-2 items-center grid grid-cols-3 '>

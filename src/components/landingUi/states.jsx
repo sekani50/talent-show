@@ -18,10 +18,10 @@ const StateFlow = () => {
       </div>
 
       <div className="w-full mx-auto  flex gap-3 items-center px-2 sm:px-20 ">
-        <div className="h-full py-4  sm:py-4 border-r-2 w-[50%] sm:[40%]">
+        <div className="h-full py-4  sm:py-4  w-[50%] sm:[40%]">
           <div
             className={`flex space-x-2 sm:space-x-6 cursor-pointer w-full justify-start items-center py-3 ${
-              active === 0 ? "border-r-4 text-[#051534]" : "text-gray-500"
+              active === 0 ? "border-r-4 text-[#051534] border-[#051534]" : "text-gray-500 border-r-2 border-gray-500"
             } border-[#051534]`}
             onClick={() => {
               setactive(0);
@@ -32,7 +32,7 @@ const StateFlow = () => {
           </div>
           <div
             className={`flex space-x-2 sm:space-x-6 cursor-pointer w-full justify-start items-center py-3 ${
-              active === 1 ? "border-r-4 text-[#051534]" : "text-gray-500"
+              active === 1 ? "border-r-4 text-[#051534] border-[#051534]" : "text-gray-500 border-r-2 border-gray-500"
             } border-[#051534]`}
             onClick={() => {
               setactive(1);
@@ -43,7 +43,7 @@ const StateFlow = () => {
           </div>
           <div
             className={`flex space-x-2 sm:space-x-6 cursor-pointer w-full justify-start items-center py-3 ${
-              active === 2 ? "border-r-4 text-[#051534]" : "text-gray-500"
+              active === 2 ? "border-r-4 text-[#051534] border-[#051534]" : "text-gray-500 border-r-2 border-gray-500"
             } border-[#051534]`}
             onClick={() => {
               setactive(2);
@@ -54,7 +54,7 @@ const StateFlow = () => {
           </div>
           <div
             className={`flex space-x-2 sm:space-x-6 cursor-pointer w-full justify-start items-center py-3 ${
-              active === 3 ? "border-r-4 text-[#051534]" : "text-gray-500"
+              active === 3 ? "border-r-4 text-[#051534] border-[#051534]" : "text-gray-500 border-r-2 border-gray-500"
             } border-[#051534]`}
             onClick={() => {
               setactive(3);
@@ -65,8 +65,8 @@ const StateFlow = () => {
           </div>
           <div
             className={`flex space-x-2 sm:space-x-6 cursor-pointer w-full justify-start items-center py-3 ${
-              active === 4 ? "border-r-4 text-[#051534]" : "text-gray-500"
-            } border-[#051534]`}
+              active === 4 ? "border-r-4 text-[#051534] border-[#051534]" : "text-gray-500 border-r-2 border-gray-500"
+            } `}
             onClick={() => {
               setactive(4);
             }}

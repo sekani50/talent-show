@@ -4,7 +4,7 @@ const MobileCard = () => {
   const navigate = useNavigate()
   return (
     <div className="w-full top-[60px] fixed z-[20] text-zinc-700 inset-x-0 h-fit">
-      <div className="w-[95%] mx-auto h-fit bg-white rounded-sm let swipeIn py-2 ">
+      <div className="w-[95%] mx-auto flex flex-col h-fit bg-white rounded-sm let swipeIn py-2 ">
         <Link to="/about" className="p-4 border-b hover:bg-gray-200">About us</Link>
         <Link to="/event" className="p-4 border-b hover:bg-gray-200">Event</Link>
         <Link to="/" className="p-4 border-b hover:bg-gray-200">Talent</Link>

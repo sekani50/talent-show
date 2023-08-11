@@ -24,7 +24,6 @@ const Register = () => {
   const [confirmpassword, setConfirm] = useState("");
   const [active, setActive] = useState(0);
   const [selectCategory, setSelectCategory] = useState(null);
-
   const [show, setshow] = useState(false);
   const [talent, setTalent] = useState("");
   const [portfolio, setPortfolio] = useState("");
@@ -65,7 +64,11 @@ const Register = () => {
           <img src={rect} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="absolute top-4 left-10">
-          <div className="w-[60px] sm:w-[70px] ">
+          <div
+          onClick={() => {
+            navigate("/")
+          }}
+           className="cursor-pointer w-[60px] sm:w-[70px] ">
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
         </div>
