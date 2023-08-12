@@ -20,7 +20,12 @@ const Landing = () => {
     const [menu, showmenu] = useState(false)
 
     function scroll() {
-
+      window.scrollTo({
+        top:600,
+        left:0, 
+        behavior:'smooth'
+        })
+    
     }
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
