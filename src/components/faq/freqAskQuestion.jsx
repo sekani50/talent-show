@@ -66,7 +66,7 @@ const FreqAskQuestion = () => {
         </div>
         {menu && <MobileCard />}
       </div>
-      <div className=" w-full gap-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 px-4 sm:px-20 py-6 sm:py-8 space-y-5 sm:space-y-8">
+      <div className=" w-full gap-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 px-4 sm:px-20 py-6 sm:py-8 ">
         <Inventories
           title={"Getting started"}
           subtitle={
