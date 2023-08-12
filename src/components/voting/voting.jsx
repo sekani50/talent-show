@@ -48,7 +48,7 @@ const Voting = () => {
             <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
               <Link to="/about">About us</Link>
               <Link to="/event">Event</Link>
-              <Link to="/">FAQ</Link>
+              <Link to="/faq">FAQ</Link>
               <Link to="/contact">Contact</Link>
             </div>
             <button 

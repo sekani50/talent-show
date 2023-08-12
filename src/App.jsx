@@ -15,6 +15,7 @@ import {
   Voting,
   ManageAccount,
   OnBoarding,
+  FreqAskQuestion,
 } from "./Pages";
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
           <Route exact path="/profile" element={<ManageAccount />} />
           <Route exact path="/event/0" element={<EventDetail />} />
           <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/faq" element={<FreqAskQuestion />} />
           <Route exact path="/forgot-password" element={<ForgotPassword />} />
       
           {/**Protected routes */}

@@ -7,7 +7,7 @@ const MobileCard = () => {
       <div className="w-[95%] mx-auto flex flex-col h-fit bg-white rounded-sm let swipeIn py-2 ">
         <Link to="/about" className="p-4 border-b hover:bg-gray-200">About us</Link>
         <Link to="/event" className="p-4 border-b hover:bg-gray-200">Event</Link>
-        <Link to="/" className="p-4 border-b hover:bg-gray-200">FAQ</Link>
+        <Link to="/faq" className="p-4 border-b hover:bg-gray-200">FAQ</Link>
         <Link to="/contact" className="p-4 border-b hover:bg-gray-200">Contact</Link>
         <div className="px-4 mt-4">
           <button 
