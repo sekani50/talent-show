@@ -19,15 +19,15 @@ const FreqAskQuestion = () => {
     <div className="w-full h-full  font-light overflow-x-hidden">
       <div className="w-full relative h-[300px] sm:h-[400px]">
         <img src={about} alt="aust" className="w-full h-full" />
-        <div className="text-white font-bold  absolute inset-0 m-auto w-fit h-fit ">
-          <h1 className="text-lg sm:text-3xl"> How can we help you?</h1>
+        <div className="text-white   absolute inset-0 m-auto space-y-4 w-fit h-fit ">
+          <h1 className="text-lg sm:text-3xl text-center font-bold"> How can we help you?</h1>
           <div className="relative w-[95%] sm:w-[500px] h-12">
             <input
               type="search"
               placeholder="search for anwers"
-              className="border pl-10 pr-4 bg-white bg-opacity-10 border-white rounded-sm focus:outline-none placeholder:text-white"
+              className="border pl-10 pr-4 w-full h-full  bg-white bg-opacity-10 border-white rounded-sm focus:outline-none placeholder:text-white"
             />
-            <div className="absolute top-3 left-3">
+            <div className="absolute top-4 left-3">
               <MdSearch className="text-[22px]" />
             </div>
           </div>
