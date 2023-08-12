@@ -18,6 +18,10 @@ import { Link, useNavigate } from "react-router-dom";
 const Landing = () => {
   const navigate = useNavigate()
     const [menu, showmenu] = useState(false)
+
+    function scroll() {
+
+    }
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
       <div className="w-full relative h-[350px] sm:h-[650px]">
@@ -31,7 +35,7 @@ const Landing = () => {
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
             <Link to="/about">About us</Link>
             <Link to="/event">Event</Link>
-            <Link to="/">Talent</Link>
+            <Link to="/">FAQ</Link>
             <Link to="/contact">Contact</Link>
           </div>
           <button
@@ -65,7 +69,9 @@ const Landing = () => {
           </div>
           <div className="flex justify-start items-start space-x-4 sm:space-x-8">
             <button className="py-2 rounded-sm px-6 bg-gray-200">Join Us</button>
-            <div className="flex text-white space-x-3 items-center">
+            <div
+            onClick={scroll}
+            className="flex cursor-pointer text-white space-x-3 items-center">
                 <div className="bg-white rounded-full p-2">
                     <BsPlayFill className="text-[22px] text-zinc-700"/>
                 </div>
