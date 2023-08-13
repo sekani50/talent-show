@@ -12,9 +12,7 @@ const StateFlow = () => {
         How it Works
       </h1>
       <div className="px-4 mx-auto justify-center flex items-center text-center leading-7 sm:leading-8 w-full sm:px-20">
-        Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus
-        amet. Ut placerat dolor massa metus quisque sodales semper. Hac donec
-        vulputate pharetra augue eu congue.
+        Unveil your talent in three simple steps.
       </div>
 
       <div className="w-full mx-auto  flex gap-3 items-center px-2 sm:px-20 ">
@@ -81,6 +79,10 @@ const StateFlow = () => {
             <div className="text-sm sm:text-xl font-semibold">
               Create an account
             </div>
+            <p className="flex flex-wrap justify-start items-start leading-7 sm:leading-8">
+              Start your journey by creating a personalized account. 
+              Join our community of talented individuals and showcase your skills to the world.
+            </p>
           </div>
         )}
         {active === 1 && (
@@ -89,6 +91,10 @@ const StateFlow = () => {
             <div className="text-sm sm:text-xl font-semibold">
               Join an Event
             </div>
+            <p className="flex flex-wrap justify-start items-start leading-7 sm:leading-8">
+              Browse through our exciting events and choose the one that suits your talent.
+              Joining is easy – simply select an event that resonates with you and become a part of the action.
+            </p>
           </div>
         )}
         {active === 2 && (
@@ -97,6 +103,10 @@ const StateFlow = () => {
             <div className="text-sm sm:text-xl font-semibold">
               Submit Requirement
             </div>
+            <p className="flex flex-wrap justify-start items-start leading-7 sm:leading-8">
+              Once you've selected an event, submit your requirements to make your participation official.
+              Share your details, showcase samples of your work, and let us know why you're the perfect fit.
+            </p>
           </div>
         )}
         {active === 3 && (
@@ -105,6 +115,10 @@ const StateFlow = () => {
             <div className="text-sm sm:text-xl font-semibold">
               Get Shortlisted
             </div>
+            <p className="flex flex-wrap justify-start items-start leading-7 sm:leading-8">
+              Our expert panel will review your submission and shortlist the most promising talents.
+              If you're selected, you'll receive a notification and be one step closer to showcasing your talent.
+            </p>
           </div>
         )}
         {active === 4 && (
@@ -113,6 +127,10 @@ const StateFlow = () => {
             <div className="text-sm sm:text-xl font-semibold">
               Get Higher Votes
             </div>
+            <p className="flex flex-wrap justify-start items-start leading-7 sm:leading-8">
+              Engage with the audience and gather votes to stand out! Encourage your friends, family, and supporters to vote for your talent. 
+              The more votes you get, the higher your chances of shining on the big stage
+            </p>
           </div>
         )}
       </div>
