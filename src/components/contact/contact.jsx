@@ -13,6 +13,13 @@ import Maps from "./map";
 const Contact = () => {
   const navigate = useNavigate()
   const [menu, showmenu] = useState(false);
+  function scroll() {
+    window.scrollTo({
+      top:400,
+      left:0, 
+      behavior:'smooth'
+      })
+    }
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
       <div className="w-full relative h-[300px] sm:h-[400px]">
@@ -20,7 +27,7 @@ const Contact = () => {
         <div className="text-white text-center items-center space-y-3 sm:space-y-4 text-lg sm:text-3xl absolute inset-0 m-auto w-fit h-fit ">
           <div className="font-bold">You have got any vital information for us?</div>
           <div className="text-sm sm:text-base">Do well to reach us</div>
-          <button className="text-[#017297] text-sm sm:text-base bg-white rounded-sm px-6 py-2 sm:px-8 sm:py-3">Contact</button>
+          <button onClick={scroll} className="text-[#017297] text-sm sm:text-base bg-white rounded-sm px-6 py-2 sm:px-8 sm:py-3">Contact</button>
         </div>
 
         <div className="w-full text-gray-300 absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">

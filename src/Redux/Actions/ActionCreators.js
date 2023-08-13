@@ -23,13 +23,6 @@ const logout = () => {
 };
 
 
-const getUser = (token) => {
-  return axios.get("/profile", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-};
 
 
 
@@ -37,25 +30,22 @@ const LoginAction = (loginParams, navigate, setLoading) => {
   return async (dispatch) => {
     setLoading(true);
     await axios
-      .post("/login", loginParams)
+      .post("/auth/login", loginParams)
       .then(async (res) => {
         console.log(res.data);
-        navigate("/dashboard");
-        const { token } = res.data;
-        dispatch(loginSuccess(token));
-
-        await getUser(token)
-          .then((res) => {
-            console.log(res.data);
-            dispatch(GetUsersSuccess(res.data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-       
-        console.log(token);
+        //navigate("/");
+        
+        const { accessToken, user } = res.data.data;
+        dispatch(GetUsersSuccess(user));
+        dispatch(loginSuccess(accessToken.token));
+        if (user.fullName) {
+          navigate("/");
+        }
+        else {
+          navigate("/onboarding");
+        }
+        
         //console.log(admin);
-        // navigate("/dashboard");
         setLoading(false);
         toast.success("Login successful");
       })
@@ -76,7 +66,7 @@ const LoginAction = (loginParams, navigate, setLoading) => {
         if (message) {
           toast.error(message);
         }
-        const { message: mm } = error.response.data.response;
+        const { message: mm } = error.response.data;
         if (mm) {
           toast.error(mm);
         }
@@ -88,7 +78,7 @@ const registration = (registrationParams, navigate, setLoading) => {
   return async (dispatch) => {
     setLoading(true);
     await axios
-      .post("/register", registrationParams, {
+      .post("/auth/signup", registrationParams, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -100,7 +90,7 @@ const registration = (registrationParams, navigate, setLoading) => {
         dispatch(GetUsersSuccess(res.data));
         dispatch(loginSuccess(res.data.token));
         toast.success("Registration Successful");
-        navigate("/dashboard");
+        navigate("/login");
         setLoading(false);
       })
       .catch((error) => {
@@ -134,6 +124,7 @@ export {
   LoginAction,
   registration,
   loginSuccess,
+  GetUsersSuccess,
   logout,
   
 };

@@ -16,6 +16,7 @@ import {
   ManageAccount,
   OnBoarding,
   FreqAskQuestion,
+  LoginOnBoarding,
 } from "./Pages";
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
           <Route exact path="/join" element={<OnBoarding />} />
           <Route exact path="/profile" element={<ManageAccount />} />
           <Route exact path="/event/0" element={<EventDetail />} />
+          <Route exact path="onboarding" element={<LoginOnBoarding />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/faq" element={<FreqAskQuestion />} />
           <Route exact path="/forgot-password" element={<ForgotPassword />} />

@@ -9,6 +9,30 @@ export const credentials = (token, payload) => {
   });
 };
 
+export const getEvents = (page) => {
+  return axios.get(`/events/?page=${page}`)
+}
+
+export const contactUs = (payload) => {
+  return axios.post(`/contact`, payload)
+}
+//////
+export const onboarding = (token,payload) => {
+  return axios.put(`/user/onboarding`, payload, {
+    headers: {
+      Authorization: "Bearer " + token,
+    }
+  })
+}
+
+///
+export const getUsers = (token) => {
+  return axios.get(`/auth/me`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    }
+  })
+}
 //
 export const updateProfile = (token, payload) => {
   return axios.put(`/profile`, payload, {

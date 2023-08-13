@@ -6,18 +6,21 @@ import { LoginAction } from "../../Redux/Actions/ActionCreators";
 import { LoaderIcon } from "lucide-react";
 import rect from "../../assets/png/rect.png";
 import next from "../../assets/png/next.png";
+import {AiOutlineEyeInvisible, AiOutlineEye} from 'react-icons/ai'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const [phone, setPhone] = useState('')
+  const [show, setshow] = useState(false)
+
 
   const handleSubmit = () => {
     const payload = {
       email,
       password,
+      
     };
 
     for (let i in payload) {
@@ -26,8 +29,8 @@ const Login = () => {
         return;
       }
     }
-    navigate("/");
-    // dispatch(LoginAction(payload, navigate, setLoading))
+   
+     dispatch(LoginAction(payload, navigate, setLoading))
   };
   return (
     <div className="w-full flex gap-x-7 h-full inset-0 fixed bg-white">
@@ -72,36 +75,36 @@ const Login = () => {
               }}
             />
           </div>
-          <div className="form-group space-y-4 w-full">
-            <label className="block font-semibold " htmlFor="email">
-              Phone Number
-            </label>
-            <input
-              className="block form__input border border-gray-200 focus:border-gray-500 hover:border-gray-500 rounded-sm focus:outline-none w-full h-11 px-4"
-              type="number"
-              placeholder="(234) 90 344 534 33"
-              name="email"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-          </div>
-          <div className="form-group space-y-4 w-full">
-            <label className="block font-semibold " htmlFor="password">
-              Password
-            </label>
-            <input
-              className="block form__input border-gray-200 border focus:border-gray-500 hover:border-gray-500 rounded-sm focus:outline-none w-full h-11 px-4"
-              type="password"
-              placeholder="********"
-              name="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
+          <div className="form-group space-y-4 w-full mb-3">
+                <label className="block font-semibold " htmlFor="password">
+                  Password
+                </label>
+                <div className="relative w-full h-11">
+                  <input
+                    className="block form__input border-gray-200 border focus:border-gray-500 hover:border-gray-500 rounded-sm focus:outline-none w-full h-full px-4"
+                    type={show ? "text" : "password"}
+                    placeholder="********"
+                    name="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                  <div
+                    onClick={() => {
+                      setshow(!show);
+                    }}
+                    className="absolute right-3 top-3"
+                  >
+                    {show ? (
+                      <AiOutlineEyeInvisible className="text-[25px]" />
+                    ) : (
+                      <AiOutlineEye className="text-[25px]" />
+                    )}
+                  </div>
+                </div>
+              </div>
+
           <div className="w-full flex justify-between items-center">
             <div className="space-x-2 flex items-center">
               <input type="checkbox" />
@@ -118,7 +121,7 @@ const Login = () => {
           </div>
           <button
             onClick={handleSubmit}
-            className="w-full h-[45px] bg-[#017297] font-semibold rounded-sm text-white flex justify-center items-center space-x-2"
+            className="w-full h-[45px] bg-[#017297] hover:bg-[#1670d2] font-semibold rounded-sm text-white flex justify-center items-center space-x-2"
           >
             {loading ? (
               <LoaderIcon className="text-base animate-spin" />

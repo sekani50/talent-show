@@ -8,6 +8,9 @@ import Footer from "../footer/footer";
 import UploadingImage from "./uploadingImage";
 import pay from "../../assets/png/pay.png"
 import next from "../../assets/png/next.png"
+import { onboarding } from "../../Utils/api";
+import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 const OnBoarding = () => {
   const [menu, showmenu] = useState(false);
   const [email, setEmail] = useState("");
@@ -18,6 +21,29 @@ const OnBoarding = () => {
   const [subcat, setSubCat] = useState("");
   const [active, setActive] = useState(0);
   const navigate = useNavigate()
+  const {token} = useSelector((state) => state.user)
+
+
+  async function handleSubmit() {
+    const payload = {
+    firstName: "U",
+    lastName: "S",
+    stageName: "",
+    talent: "coding",
+    reason: "To build career"
+    }
+
+    await onboarding(token, payload)
+    .then((res) => {
+      toast.success('Successfully onboard')
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+
   return (
     <div className="w-full overflow-x-hidden h-full bg-none ">
       <div className="w-full z-[20] text-gray-300 bg-[#0C0821] absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">
@@ -265,7 +291,7 @@ const OnBoarding = () => {
             </div>
             <div className="text-xs text-yellow-600 sm:text-sm">NB: Payment is non-refundable</div>
             <button
-              
+              onClick={handleSubmit}
                 className="w-fit px-8 py-2 bg-[#017297] rounded-sm text-white"
               >
                 Proceed

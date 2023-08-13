@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import next from "../../assets/png/next.png";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
 import austin from "../../assets/png/austin.png";
 import MobileCard from "../landing/mobileCard";
+import { getEvents } from "../../Utils/api";
 const Events = () => {
   const [menu, showmenu] = useState(false);
   const navigate = useNavigate();
+  const [page, setPage] = useState(1)
+  useEffect(() => {
+    async function loadevents() {
+      await getEvents(page)
+      .then((res) => {
+        console.log(res)
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+    loadevents()
+  },[page])
   return (
     <div className="w-full relative px-4 sm:px-20 h-full bg-[#10061A]  font-light overflow-x-hidden">
       <div className="w-full text-gray-300 absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">

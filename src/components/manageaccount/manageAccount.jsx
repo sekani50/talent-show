@@ -8,10 +8,34 @@ import MyEvents from './myEvents'
 import austin from '../../assets/png/austin.png'
 import vote from '../../assets/png/vote.png'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getUsers } from '../../Utils/api'
+import { GetUsersSuccess } from '../../Redux/Actions/ActionCreators'
 const ManageAccount = () => {
+  const {token, currentUser} = useSelector((state) => state.user)
     const [active, setactive] = useState(0)
-    const [portfolio, setPortfolio] = useState('')
+    const [portfolio, setPortfolio] = useState(currentUser?.portfolio)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+   
+
+    useEffect(() => {
+      async function getDetails() {
+        await getUsers(token)
+        .then((res) => {
+         // console.log(res.data.data)
+          const {data} = res.data
+          dispatch(GetUsersSuccess(data))
+          
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+      }
+      getDetails()
+    },[])
     return (
         <div className='w-full overflow-x-hidden '>
             <div className='bg-[#313133] flex justify-between items-center px-4 sm:px-10 py-2'>
@@ -27,7 +51,7 @@ const ManageAccount = () => {
                 <img src={austin} alt="w" className='w-full h-full object-cover rounded-full' />
             </div>
 
-            <p className='w-full col-span-2 text-ellipsis whitespace-nowrap overflow-hidden text-white'>Cassandra</p>
+            <p className='w-full col-span-2 text-ellipsis whitespace-nowrap overflow-hidden text-white'>{currentUser?.firstName || '___'}</p>
           </div>
             </div>
             <div className="w-full relative h-[250px] sm:h-[350px]">
@@ -41,14 +65,14 @@ const ManageAccount = () => {
 
                 </div>
                 <div className='space-y-1'>
-                    <p className='font-medium'>Cassandra Billz</p>
-                    <p className='text-sm sm:text-[13px]'>Afrobeat Artist</p>
+                    <p className='font-medium'>{`${currentUser?.firstName || '_'} ${currentUser?.lastName || '_'}`}</p>
+                    <p className='text-sm sm:text-[13px]'>{currentUser?.talent || ''}</p>
 
                 </div>
 
                 <div className='py-2 border-b w-fit  space-x-3 flex items-center mx-auto border-black'><span>Event applied</span> <div className='text-center w-6 h-6 bg-green-300 text-green-600 p-1 text-xs rounded-md'>0</div></div>
                 <div className='py-2 border-b w-fit mx-auto space-x-3 flex items-center border-black'><span>Event Won</span> <div className='text-center w-6 h-6 bg-red-300 text-red-600 p-1 text-xs rounded-md'>0</div></div>
-                <div className='py-2 border-b w-fit mx-auto space-x-3 flex items-center border-black'><sapn>Current Event</sapn> <div className='text-center w-6 h-6 bg-red-300 text-red-600 p-1 text-xs rounded-md'>0</div></div>
+                <div className='py-2 border-b w-fit mx-auto space-x-3 flex items-center border-black'><span>Current Event</span> <div className='text-center w-6 h-6 bg-red-300 text-red-600 p-1 text-xs rounded-md'>0</div></div>
 
                 <div className="form-group space-y-2 w-full mb-3">
                 <label className="block  " htmlFor="text">
@@ -59,6 +83,7 @@ const ManageAccount = () => {
                   type="text"
                   placeholder="https://example.com"
                   name="text"
+                
                   value={portfolio}
                   onChange={(e) => {
                     setPortfolio(e.target.value);
