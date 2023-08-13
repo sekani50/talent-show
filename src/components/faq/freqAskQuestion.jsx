@@ -122,24 +122,24 @@ const FreqAskQuestion = () => {
       </div>
       <div className="px-4 sm:px-20 py-6 sm:py-8 space-y-5 sm:space-y-8 w-full">
         <Questions
-        title={'Do you have customer support?'}
-        subtitle={'Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellusamet'}
+        title={'How do I create an account?'}
+        subtitle={`To create an account, simply navigate to the "Sign Up" page on our website. You'll need to provide your basic information, such as your name, email address, and a password. Once you've filled in the details, click "Create Account," and you'll be all set to start your journey with us!`}
         />
           <Questions
-        title={'Do you have customer support?'}
-        subtitle={'Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellusamet'}
+        title={'What types of talents are eligible for the show?'}
+        subtitle={`Our talent show welcomes a diverse range of talents, from music and dance to art, comedy, and more. Whether you're a skilled musician, a captivating storyteller, or possess a unique talent, we encourage you to join and showcase what makes you exceptional.`}
         />
           <Questions
-        title={'Do you have customer support?'}
-        subtitle={'Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellusamet'}
+        title={'Can I participate in multiple events simultaneously?'}
+        subtitle={`Absolutely! You can participate in multiple events concurrently if you believe your talents fit the criteria for each event. However, make sure you manage your time effectively to ensure you can give your best performance for each event.`}
         />
           <Questions
-        title={'Do you have customer support?'}
-        subtitle={'Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellusamet'}
+        title={'Is there an age limit for participants?'}
+        subtitle={`While the age limit may vary for different events, we strive to create opportunities for talents of all ages. Please check the specific event details to see if there's an age requirement and whether it aligns with your eligibility.`}
         />
           <Questions
-        title={'Do you have customer support?'}
-        subtitle={'Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellusamet'}
+        title={'How do I submit my requirements for a specific event?'}
+        subtitle={`After creating an account and selecting the event you're interested in, you'll find a "Submit Requirements" section on the event page. This section will guide you through the submission process, where you can upload necessary documents, videos, and images to showcase your talent effectively. Make sure to provide all requested information to increase your chances of being shortlisted.`}
         />
       </div>
       <ContactUs/>
