@@ -1,14 +1,35 @@
 import React, { useState } from "react";
 import Input from "./input";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUsers } from "../../Utils/api";
+import { GetUsersSuccess } from "../../Redux/Actions/ActionCreators";
 const UpdateAccount = () => {
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const {token, currentUser} = useSelector((state) => state.user)
+  const [email, setEmail] = useState(currentUser?.email);
+  const [phone, setPhone] = useState(currentUser?.phoneNumber);
+  const [name, setName] = useState(currentUser?.firstName);
+  const [lastname, setLastName] = useState(currentUser?.lastName);
   const navigate = useNavigate();
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    async function getDetails() {
+      await getUsers(token)
+      .then((res) => {
+        //console.log(res)
+        const {data} = res.data
+        dispatch(GetUsersSuccess(data))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+    getDetails()
+  },[])
   return (
     <div className="w-full mx-auto md:mx-0 grid lg:gap-6 grid-cols-1 lg:grid-cols-2 py-3">
       <Input
