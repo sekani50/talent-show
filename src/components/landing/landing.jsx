@@ -34,7 +34,11 @@ const Landing = () => {
         <div className="gradient absolute w-full inset-x-0 top-0 h-3"></div>
 
         <div className="w-full text-gray-300 absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">
-          <div className="w-[60px] sm:w-[70px] ">
+        <div 
+          onClick={()=> {
+            navigate("/")
+          }}
+          className="cursor-pointer w-[60px] sm:w-[70px] ">
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">

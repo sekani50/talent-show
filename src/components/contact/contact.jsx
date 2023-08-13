@@ -6,11 +6,12 @@ import Footer from "../footer/footer";
 import { AiOutlineClose } from "react-icons/ai";
 import MobileCard from "../landing/mobileCard";
 import { FiMenu } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import ContactInfo from "./contactInfo";
 import Maps from "./map";
 const Contact = () => {
+  const navigate = useNavigate()
   const [menu, showmenu] = useState(false);
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
@@ -23,7 +24,11 @@ const Contact = () => {
         </div>
 
         <div className="w-full text-gray-300 absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">
-          <div className="w-[60px] sm:w-[70px] ">
+        <div 
+          onClick={()=> {
+            navigate("/")
+          }}
+          className="cursor-pointer w-[60px] sm:w-[70px] ">
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">

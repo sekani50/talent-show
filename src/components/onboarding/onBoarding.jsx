@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
 import MobileCard from "../landing/mobileCard";
@@ -17,12 +17,17 @@ const OnBoarding = () => {
   const [category, setCategory] = useState("");
   const [subcat, setSubCat] = useState("");
   const [active, setActive] = useState(0);
+  const navigate = useNavigate()
   return (
     <div className="w-full overflow-x-hidden h-full bg-none ">
       <div className="w-full z-[20] text-gray-300 bg-[#0C0821] absolute flex justify-between items-center inset-x-0 top-0 py-4 px-4 sm:px-20">
-        <div className="w-[60px] sm:w-[70px] ">
-          <img src={next} alt="dd" className="w-full h-full" />
-        </div>
+      <div 
+          onClick={()=> {
+            navigate("/")
+          }}
+          className="cursor-pointer w-[60px] sm:w-[70px] ">
+            <img src={next} alt="dd" className="w-full h-full" />
+          </div>
         <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
           <Link to="/about">About us</Link>
           <Link to="/event">Event</Link>
