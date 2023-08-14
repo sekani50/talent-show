@@ -9,8 +9,7 @@ const OurBlog = () => {
         Our Blogs
       </h1>
       <div className="px-4 mx-auto justify-center flex items-center text-center leading-7 sm:leading-8 w-full sm:px-20">
-        Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus
-        amet. Ut placerat dolor massa metus quisque sodales semper.
+        Explore Insights and Inspiration: Dive into Our Blogs for Engaging Content!
       </div>
       <div >
         <img src={vector} alt='' className="mx-auto" />
