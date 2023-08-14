@@ -74,49 +74,49 @@ const FreqAskQuestion = () => {
         <Inventories
           title={"Getting started"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Getting started is easy! Click "Sign Up," provide your basic details, and you're in.`
           }
         />
         <Inventories
           title={"Events"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Browse events in the "Events" section. Pick what interests you.`
           }
         />
         <Inventories
           title={"Talents"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `From music to art, we celebrate a range of talents.`
           }
         />
         <Inventories
           title={"Categories"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Categories group similar talents for fair evaluation.`
           }
         />
         <Inventories
           title={"Enrolment Payment"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Pay securely online with various options.`
           }
         />
         <Inventories
           title={"Voting"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Supporters can vote for you directly on your profile.`
           }
         />
         <Inventories
           title={"Shortlisting"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Shortlisting is a step toward potential participation.`
           }
         />
         <Inventories
           title={"Price winning"}
           subtitle={
-            "Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo tellus amet"
+            `Winners are chosen based on various factors.`
           }
         />
       </div>
