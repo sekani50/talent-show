@@ -26,8 +26,8 @@ const Footer = () => {
         </div>
         <div className="space-y-6 sm:col-span-2">
           <h2 className="font-semibold text-lg sm:text-xl uppercase">About</h2>
-          <p>Terms and Conditon</p>
-          <p>Privacy $ Policy</p>
+          <p>Terms and Condition</p>
+          <p>Privacy & Policy</p>
         </div>
       </div>
 

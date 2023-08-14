@@ -68,28 +68,7 @@ const Contact = () => {
             Contact
           </Link>
           </div>
-          {currentUser ? (
-            <div
-              onClick={() => {
-                navigate("/profile");
-              }}
-              className="cursor-pointer flex space-x-3 items-center"
-            >
-              <div className="w-[40px] h-[40px] rounded-full">
-                <img src={user} alt="" className="w-full h-full rounded-full" />
-              </div>
-              <div className="text-white">{currentUser?.firstName}</div>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                navigate("/register");
-              }}
-              className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
-            >
-              Join us
-            </button>
-          )}
+        
           <div
             onClick={() => {
               showmenu(!menu);

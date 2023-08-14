@@ -55,7 +55,7 @@ const Events = () => {
           <img src={next} alt="dd" className="w-full h-full" />
         </div>
         <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-          <Link
+        <Link
             to="/about"
             className={`${pathname.includes("about") ? "font-semibold" : ""}`}
           >
