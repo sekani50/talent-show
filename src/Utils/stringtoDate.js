@@ -44,3 +44,20 @@ return `${hourformat}:${minutes}:${seconds} ${period}`;
 
 }
 
+
+export function formatDate(inputDate) {
+  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = [
+    'Jan', 'Feb', 'March', 'April', 'May', 'June',
+    'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+  ];
+
+  const date = new Date(inputDate);
+  const dayOfWeek = daysOfWeek[date.getUTCDay()];
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+
+  const time = {dayOfWeek,month,year}
+  return time;
+}
+
