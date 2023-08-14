@@ -6,8 +6,10 @@ import { FiMenu } from "react-icons/fi";
 import austin from "../../assets/png/austin.png";
 import MobileCard from "../landing/mobileCard";
 import { getEvents } from "../../Utils/api";
+import { formatDate } from "../../Utils/stringtoDate";
 const Events = () => {
   const [menu, showmenu] = useState(false);
+  const [data, setdata] = useState([])
   const navigate = useNavigate();
   const [page, setPage] = useState(1)
   useEffect(() => {
@@ -15,6 +17,7 @@ const Events = () => {
       await getEvents(page)
       .then((res) => {
         console.log(res)
+        setdata(res.data.data)
 
       })
       .catch((err) => {
@@ -67,21 +70,22 @@ const Events = () => {
         </h1>
         <p className="text-center">Lists of upcoming events</p>
       </div>
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-4 items-center">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((i, j) => {
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 justify-center gap-6 lg:grid-cols-3 xl:grid-cols-4 items-center">
+        {data.map(({coverImage,eventName, _id}, j) => {
           return (
             <div
               onClick={() => {
-                navigate("/event/0");
+                navigate(`/event/${_id}`);
               }}
               key={j}
-              className="w-full h-[160px] sm:h-[280px] rounded-sm"
+              className="w-full h-[160px] cursor-pointer relative sm:h-[280px] rounded-sm"
             >
               <img
-                src={austin}
+                src={coverImage?.url}
                 alt="aus"
                 className="w-full h-full object-cover rounded-sm"
               />
+              <div className="absolute bottom-2 left-3 text-yellow-500">{eventName}</div>
             </div>
           );
         })}
@@ -92,7 +96,7 @@ const Events = () => {
           Other Upcoming Events
         </h1>
 
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((i, j) => {
+        {data?.map(({eventName,contestStart, _id}, j) => {
           return (
             <div
               key={j}
@@ -100,16 +104,16 @@ const Events = () => {
             >
               <div className="h-full sm:w-[90px] p-1 border-r border-white">
                 <div className="p-2 w-full h-full text-center bg-[#FFCC15]">
-                  <div>Sun</div>
-                  <div className="font-semibold text-lg">June</div>
-                  <div>2023</div>
+                  <div>{formatDate(contestStart)?.dayOfWeek}</div>
+                  <div className="font-semibold text-lg">{formatDate(contestStart)?.month}</div>
+                  <div>{formatDate(contestStart)?.year}</div>
                 </div>
               </div>
               <div className="w-full px-2 flex justify-between items-center sm:px-3 py-2 sm:py-3">
-                <div className="text-white font-semibold">Roller Coaster</div>
+                <div className="text-white font-semibold">{eventName}</div>
                 <button
                   onClick={() => {
-                    navigate("/event/0");
+                    navigate(`/event/${_id}`);
                   }}
                   className="text-[#017297] bg-white rounded-sm px-4 sm:px-8 py-2"
                 >
