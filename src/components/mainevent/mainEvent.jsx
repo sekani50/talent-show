@@ -3,7 +3,7 @@ import AboutEvent from "./tabs/aboutEvent";
 import Participants from "./tabs/participant";
 import FullCategory from "./tabs/fullCategory";
 
-const MainEvent = () => {
+const MainEvent = ({event}) => {
   const [active, setactive] = useState(0);
   return (
     <div className="w-full py-6 bg-main px-4 sm:px-20 space-y-6 sm:space-y-8 sm:py-8">
@@ -34,9 +34,9 @@ const MainEvent = () => {
         </div>
       </div>}
 
-    {active === 0 && <AboutEvent/>}
-    {active === 1 && <Participants setactive={setactive} />}
-    {active === 2 && <FullCategory setactive={setactive}/>}
+    {active === 0 && <AboutEvent event={event}/>}
+    {active === 1 && <Participants event={event} setactive={setactive} />}
+    {active === 2 && <FullCategory event={event} setactive={setactive}/>}
     </div>
   );
 };

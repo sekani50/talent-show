@@ -74,3 +74,17 @@ export const actionVideo = (token, form) => {
 export const upcomingEvent = () => {
   return axios.get(`/events/upcoming-events`, {});
 };
+
+///events/:eventId
+export const singleEvent = (id) => {
+  return axios.get(`/events/${id}`, {});
+};
+
+///events/:eventId
+export const contest = (id, payload, token) => {
+  return axios.post(`/events/join/${id}`, payload, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};

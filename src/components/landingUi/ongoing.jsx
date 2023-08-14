@@ -8,6 +8,7 @@ const Ongoing = () => {
   const [data, setdata] = useState([]);
   const { token } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function loadevents() {
       await getEvents(1)

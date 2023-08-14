@@ -6,12 +6,16 @@ import Footer from "../footer/footer";
 import { AiOutlineClose } from "react-icons/ai";
 import MobileCard from "../landing/mobileCard";
 import { FiMenu } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import ContactInfo from "./contactInfo";
 import Maps from "./map";
+import user from "../../assets/png/customerpic.png"
+import { useSelector } from "react-redux";
 const Contact = () => {
+  const {currentUser} = useSelector((state) => state.user)
   const navigate = useNavigate()
+  const {pathname} = useLocation()
   const [menu, showmenu] = useState(false);
   function scroll() {
     window.scrollTo({
@@ -39,14 +43,53 @@ const Contact = () => {
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-            <Link to="/about">About us</Link>
-            <Link to="/event">Event</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
+          <Link
+            to="/about"
+            className={`${pathname.includes("about") ? "font-semibold" : ""}`}
+          >
+            About us
+          </Link>
+          <Link
+            to="/event"
+            className={`${pathname.includes("event") ? "font-semibold" : ""}`}
+          >
+            Event
+          </Link>
+          <Link
+            to="/faq"
+            className={`${pathname.includes("faq") ? "font-semibold" : ""}`}
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/contact"
+            className={`${pathname.includes("contact") ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
           </div>
-          <button className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
-            Join us
-          </button>
+          {currentUser ? (
+            <div
+              onClick={() => {
+                navigate("/profile");
+              }}
+              className="cursor-pointer flex space-x-3 items-center"
+            >
+              <div className="w-[40px] h-[40px] rounded-full">
+                <img src={user} alt="" className="w-full h-full rounded-full" />
+              </div>
+              <div className="text-white">{currentUser?.firstName}</div>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/register");
+              }}
+              className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
+            >
+              Join us
+            </button>
+          )}
           <div
             onClick={() => {
               showmenu(!menu);

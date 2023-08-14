@@ -5,16 +5,20 @@ import MobileCard from "../landing/mobileCard";
 import { FiMenu } from "react-icons/fi";
 import next from "../../assets/png/next.png";
 import Footer from "../footer/footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import Inventories from "../composable/inventories";
 import Subscribe from "../landingUi/subscribe";
 import ContactUs from "../landingUi/contactus";
 import Questions from "../composable/questions";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import user from "../../assets/png/customerpic.png"
 const FreqAskQuestion = () => {
     const navigate = useNavigate()
+    const {pathname} = useLocation()
     const [menu, showmenu] = useState(false)
+    const {currentUser} = useSelector((state) => state.user)
   return (
     <div className="w-full h-full  font-light overflow-x-hidden">
       <div className="w-full relative h-[300px] sm:h-[400px]">
@@ -42,19 +46,53 @@ const FreqAskQuestion = () => {
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-            <Link to="/about">About us</Link>
-            <Link to="/event">Event</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-          <button
-            onClick={() => {
-              navigate("/register");
-            }}
-            className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
+          <Link
+            to="/about"
+            className={`${pathname.includes("about") ? "font-semibold" : ""}`}
           >
-            Join us
-          </button>
+            About us
+          </Link>
+          <Link
+            to="/event"
+            className={`${pathname.includes("event") ? "font-semibold" : ""}`}
+          >
+            Event
+          </Link>
+          <Link
+            to="/faq"
+            className={`${pathname.includes("faq") ? "font-semibold" : ""}`}
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/contact"
+            className={`${pathname.includes("contact") ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
+          </div>
+          {currentUser ? (
+            <div
+              onClick={() => {
+                navigate("/profile");
+              }}
+              className="cursor-pointer flex space-x-3 items-center"
+            >
+              <div className="w-[40px] h-[40px] rounded-full">
+                <img src={user} alt="" className="w-full h-full rounded-full" />
+              </div>
+              <div className="text-white">{currentUser?.firstName}</div>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/register");
+              }}
+              className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
+            >
+              Join us
+            </button>
+          )}
           <div
             onClick={() => {
               showmenu(!menu);

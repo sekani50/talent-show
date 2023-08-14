@@ -13,12 +13,13 @@ import FeedBack from "../landingUi/feedback";
 import OurBlog from "../landingUi/ourBlog";
 import Subscribe from "../landingUi/subscribe";
 import Footer from "../footer/footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 
 const Landing = () => {
   const navigate = useNavigate()
     const [menu, showmenu] = useState(false)
-
+  const {pathname} = useLocation()
     function scroll() {
       window.scrollTo({
         top:600,
@@ -42,10 +43,30 @@ const Landing = () => {
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
           <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-            <Link to="/about">About us</Link>
-            <Link to="/event">Event</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
+          <Link
+            to="/about"
+            className={`${pathname.includes("about") ? "font-semibold" : ""}`}
+          >
+            About us
+          </Link>
+          <Link
+            to="/event"
+            className={`${pathname.includes("event") ? "font-semibold" : ""}`}
+          >
+            Event
+          </Link>
+          <Link
+            to="/faq"
+            className={`${pathname.includes("faq") ? "font-semibold" : ""}`}
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/contact"
+            className={`${pathname.includes("contact") ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
           </div>
           <button
              onClick={() => {

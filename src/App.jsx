@@ -60,7 +60,7 @@ const App = () => {
           <Route exact path="/voting" element={<Voting />} />
           <Route exact path="/join" element={<OnBoarding />} />
           <Route exact path="/profile" element={<ManageAccount />} />
-          <Route exact path="/event/0" element={<EventDetail />} />
+          <Route exact path="/event/:id" element={<EventDetail />} />
           <Route exact path="onboarding" element={<LoginOnBoarding />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/faq" element={<FreqAskQuestion />} />

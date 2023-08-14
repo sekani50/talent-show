@@ -8,12 +8,14 @@ import Footer from "../footer/footer";
 import UploadingImage from "./uploadingImage";
 import pay from "../../assets/png/pay.png";
 import next from "../../assets/png/next.png";
-import { actionVideo, onboarding } from "../../Utils/api";
+import { actionVideo, contest } from "../../Utils/api";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { LoaderIcon } from "lucide-react";
+import user from "../../assets/png/customerpic.png"
 const OnBoarding = () => {
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
+  const [loading, setloading] = useState(false);
   const [selectCategory, setSelectCategory] = useState("");
   const [menu, showmenu] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,63 +27,58 @@ const OnBoarding = () => {
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
   const [checkprofile, setcheckprofile] = useState(false);
-  const { token } = useSelector((state) => state.user);
-  const [videoloading, setvideoloading] = useState(false);
+  const { token, currentUser } = useSelector((state) => state.user);
+
   const [uploadedVideo, setUploadedVideo] = useState("");
-  const [actionvideo, setvid] = useState("");
+
   async function handleSubmit() {
+   
+ console.log(uploadedVideo);
+    setloading(true);
+   
+
     const formdata = new FormData();
-    formdata.append("useAsOnProfile", checkprofile);
-    formdata.append("fullName", name);
-    formdata.append("email", email);
-    formdata.append("phoneNumber", phone);
-    formdata.append("portfolio", portfolio);
-    formdata.append("category", category);
-    formdata.append("in_action_video", actionvideo);
-
-    await onboarding(token, formdata)
-      .then((res) => {
-        toast.success("Successfully onboard");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  async function uploadVideo() {
-    if (!uploadedVideo) {
-      toast.error("Please add a video");
-      return;
+    if (checkprofile) {
+      formdata.append("useAsOnProfile", checkprofile);
+      formdata.append("category", category);
+      formdata.append("in_action_video", uploadedVideo);
+    } else {
+      formdata.append("useAsOnProfile", checkprofile);
+      formdata.append("fullName", name);
+      formdata.append("email", email);
+      formdata.append("phoneNumber", phone);
+      formdata.append("portfolio", portfolio);
+      formdata.append("category", category);
+      formdata.append("in_action_video", uploadedVideo);
     }
-    const formdata = new FormData();
-    formdata.append("video", uploadedVideo);
 
-    setvideoloading(true);
-    await actionVideo(token, formdata)
-      .then((res) => {
-        console.log(res);
-        setvideoloading(false);
-        setvid(res.data.data);
-        toast.success("Video uploaded successfully");
-      })
-      .catch((err) => {
-        console.log(err);
-        setvideoloading(false);
-        const { error } = err.response.data;
-        if (error) {
-          toast.error(error.message);
-        }
-        const { message } = err.response.data.error;
-        if (message) {
-          toast.error(message);
-        }
-        const { message: mm } = err.response.data;
-        if (mm) {
-          toast.error(mm);
-        }
-        setvideoloading(false);
-      });
+    {
+      uploadedVideo &&
+        (await contest(state?.data?.id, formdata, token)
+          .then((res) => {
+            toast.success("Successfully onboard");
+            console.log(res);
+            setloading(false);
+            window.location.reload()
+          })
+          .catch((err) => {
+            console.log(err);
+            const { error } = err.response.data;
+            if (error) {
+              toast.error(error.message);
+            }
+            const { message } = err.response.data.error;
+            if (message) {
+              toast.error(message);
+            }
+            const { message: mm } = err.response.data;
+            if (mm) {
+              toast.error(mm);
+            }
+            setloading(false);
+           // window.location.reload()
+          }));
+    }
   }
 
   return (
@@ -96,14 +93,21 @@ const OnBoarding = () => {
           <img src={next} alt="dd" className="w-full h-full" />
         </div>
         <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-          <Link to="/about">About us</Link>
-          <Link to="/event">Event</Link>
-          <Link to="/faq">FAQ</Link>
-          <Link to="/contact">Contact</Link>
+        <Link to="/about" className={`${pathname.includes('about') ? 'font-semibold' : ''}`}>About us</Link>
+          <Link to="/event" className={`${pathname.includes('event') ? 'font-semibold' : ''}`}>Event</Link>
+          <Link to="/faq" className={`${pathname.includes('faq') ? 'font-semibold' : ''}`}>FAQ</Link>
+          <Link to="/contact" className={`${pathname.includes('contact') ? 'font-semibold' : ''}`}>Contact</Link>
         </div>
-        <button className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
-          Join us
-        </button>
+      <div
+      onClick={() => {
+        navigate("/profile")
+      }}
+       className="cursor-pointer flex space-x-3 items-center">
+        <div className="w-[40px] h-[40px] rounded-full">
+            <img src={user} alt="" className="w-full h-full rounded-full"/>
+        </div>
+          <div className="text-white">{currentUser?.firstName}</div>
+      </div>
         <div
           onClick={() => {
             showmenu(!menu);
@@ -134,52 +138,52 @@ const OnBoarding = () => {
           <div className={`flex space-x-3 items-center `}>
             <div
               className={`w-6 h-6 text-xs flex items-center justify-center rounded-full px-3 py-1 ${
-                active === 0 ? "text-white bg-[#017297]" : "bg-gray-200"
+                active >= 0 ? "text-white bg-[#017297]" : "bg-gray-200"
               }`}
             >
               1
             </div>
             <div
               className={`w-[28px] sm:w-[50px] h-2 rounded-l-lg ${
-                active === 0 ? "bg-[#017297]" : "bg-gray-300"
+                active >= 0 ? "bg-[#017297]" : "bg-gray-300"
               }`}
             ></div>
           </div>
           <div className="flex space-x-3 items-center">
             <div
               className={`w-[28px] sm:w-[50px] h-2  rounded-r-lg ${
-                active === 1 ? "bg-[#017297]" : "bg-gray-300"
+                active >= 1 ? "bg-[#017297]" : "bg-gray-300"
               }`}
             ></div>
             <div
               className={`w-6 h-6 text-xs flex items-center justify-center rounded-full px-3 py-1 ${
-                active === 1 ? "text-white bg-[#017297]" : "bg-gray-200"
+                active >= 1 ? "text-white bg-[#017297]" : "bg-gray-200"
               }`}
             >
               2
             </div>
             <div
               className={`w-[28px] sm:w-[50px] h-2  rounded-l-lg ${
-                active === 1 ? "bg-[#017297]" : "bg-gray-300"
+                active >= 1 ? "bg-[#017297]" : "bg-gray-300"
               }`}
             ></div>
           </div>
           <div className="flex space-x-3 items-center">
             <div
               className={`w-[28px] sm:w-[50px] h-2  rounded-r-lg ${
-                active === 2 ? "bg-[#017297]" : "bg-gray-300"
+                active >= 2 ? "bg-[#017297]" : "bg-gray-300"
               }`}
             ></div>
             <div
               className={`w-6 h-6 text-xs flex items-center justify-center rounded-full px-3 py-1 ${
-                active === 2 ? "text-white bg-[#017297]" : "bg-gray-200"
+                active >= 2 ? "text-white bg-[#017297]" : "bg-gray-200"
               }`}
             >
               3
             </div>
             <div
               className={`w-[28px] sm:w-[50px] h-2  rounded-l-lg ${
-                active === 2 ? "bg-[#017297]" : "bg-gray-300"
+                active >= 2 ? "bg-[#017297]" : "bg-gray-300"
               }`}
             ></div>
           </div>
@@ -369,18 +373,6 @@ const OnBoarding = () => {
         )}
         {active === 2 && (
           <div>
-            <div className="flex  items-end justify-end w-full">
-              <button
-                onClick={uploadVideo}
-                className="text-white bg-[#017297] w-[120px]  flex items-center justify-center h-[44px] rounded-sm"
-              >
-                {videoloading ? (
-                  <LoaderIcon className="text-[22px] animate-spin" />
-                ) : (
-                  " Upload Video"
-                )}
-              </button>
-            </div>
             <UploadingImage setUploadedImage={setUploadedVideo} />
 
             <div className="w-full my-3 items-center flex justify-between">
@@ -417,9 +409,13 @@ const OnBoarding = () => {
             </div>
             <button
               onClick={handleSubmit}
-              className="w-fit px-8 py-2 bg-[#017297] rounded-sm text-white"
+              className=" w-[120px] py-2 flex items-center justify-center bg-[#017297] rounded-sm text-white"
             >
-              Proceed
+              {loading ? (
+                <LoaderIcon className="text-[22px] animate-spin" />
+              ) : (
+                "Proceed"
+              )}
             </button>
             <button
               onClick={() => {
