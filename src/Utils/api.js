@@ -1,8 +1,9 @@
 import axios from "./useAxios";
 
-//credentials for verfication
-export const credentials = (token, payload) => {
-  return axios.post("/associate/setup", payload, {
+//vote
+
+export const voting = (token, eventId, participantId, payload) => {
+  return axios.post(`/events/vote/${eventId}/${participantId}`, payload, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -10,29 +11,29 @@ export const credentials = (token, payload) => {
 };
 
 export const getEvents = (page) => {
-  return axios.get(`/events/?page=${page}`)
-}
+  return axios.get(`/events/?page=${page}`);
+};
 
 export const contactUs = (payload) => {
-  return axios.post(`/contact`, payload)
-}
+  return axios.post(`/contact`, payload);
+};
 //////
-export const onboarding = (token,payload) => {
+export const onboarding = (token, payload) => {
   return axios.put(`/user/onboarding`, payload, {
     headers: {
       Authorization: "Bearer " + token,
-    }
-  })
-}
+    },
+  });
+};
 
 ///
 export const getUsers = (token) => {
   return axios.get(`/auth/me`, {
     headers: {
       Authorization: "Bearer " + token,
-    }
-  })
-}
+    },
+  });
+};
 //
 export const updateProfile = (token, payload) => {
   return axios.put(`/profile`, payload, {
@@ -60,3 +61,16 @@ export const sendMail = (token, payload) => {
   });
 };
 
+////events/upload-in-action-video
+export const actionVideo = (token, form) => {
+  return axios.post(`/upload-video`, form, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
+
+///events/upcoming-events
+export const upcomingEvent = () => {
+  return axios.get(`/events/upcoming-events`, {});
+};

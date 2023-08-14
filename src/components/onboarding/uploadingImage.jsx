@@ -61,7 +61,7 @@ const UploadingImage = ({ setUploadedImage }) => {
         )}
      
         {upload &&  (
-          <img src={upload} alt="img" className="w-full h-full object-cover" />
+          <video controls src={upload} className="w-full h-full object-cover" />
         )}
         <input
           type="file"
