@@ -1,4 +1,4 @@
-import React from "react";         
+import React, { useEffect } from "react";         
 import vote from '../../assets/png/vote.png'
 import { AiOutlineClose } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
@@ -6,14 +6,34 @@ import MobileCard from "../landing/mobileCard";
 import Subscribe from "../landingUi/subscribe";
 import Footer from "../footer/footer";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import austin from '../../assets/png/austin.png'
 import next from '../../assets/png/next.png'
 import Profile from "./widget/profile";
 import VotingForm from "./widget/votingform";
+import user from '../../assets/png/customerpic.png'
+import { useSelector } from "react-redux";
+import { singleParticipant } from "../../Utils/api";
 const Voting = () => {
+  const {id} = useParams()
+  const {currentUser} = useSelector((state) => state.user)
     const navigate = useNavigate()
+    const {pathname} = useLocation()
     const [menu, showmenu] = useState(false)
+    const {token} = useSelector((state) => state.user)
+
+    useEffect(() => {
+      async function getParticipant() {
+          await singleParticipant(token, id)
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+      getParticipant()
+    },[])
     return (
         <div className="w-full h-full   font-light overflow-x-hidden">
         <div className="w-full relative h-[300px] sm:h-[400px]">
@@ -50,18 +70,53 @@ const Voting = () => {
             <img src={next} alt="dd" className="w-full h-full" />
           </div>
             <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-              <Link to="/about">About us</Link>
-              <Link to="/event">Event</Link>
-              <Link to="/faq">FAQ</Link>
-              <Link to="/contact">Contact</Link>
+            <Link
+            to="/about"
+            className={`${pathname.includes("about") ? "font-semibold" : ""}`}
+          >
+            About us
+          </Link>
+          <Link
+            to="/event"
+            className={`${pathname.includes("event") ? "font-semibold" : ""}`}
+          >
+            Event
+          </Link>
+          <Link
+            to="/faq"
+            className={`${pathname.includes("faq") ? "font-semibold" : ""}`}
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/contact"
+            className={`${pathname.includes("contact") ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
             </div>
-            <button 
-               onClick={() => {
-                navigate("/register")
+            {currentUser ? (
+            <div
+              onClick={() => {
+                navigate("/profile");
               }}
-            className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300">
+              className="cursor-pointer hidden sm:flex space-x-3 items-center"
+            >
+              <div className="w-[40px] h-[40px] rounded-full">
+                <img src={user} alt="" className="w-full h-full rounded-full" />
+              </div>
+              <div className="text-white">{currentUser?.firstName}</div>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                navigate("/register");
+              }}
+              className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
+            >
               Join us
             </button>
+          )}
             <div
             onClick={() => {
               showmenu(!menu)

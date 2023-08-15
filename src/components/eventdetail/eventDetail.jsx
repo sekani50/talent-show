@@ -111,7 +111,7 @@ const [event, setevent]  = useState(null)
               onClick={() => {
                 navigate("/profile");
               }}
-              className="cursor-pointer flex space-x-3 items-center"
+              className="cursor-pointer hidden sm:flex space-x-3 items-center"
             >
               <div className="w-[40px] h-[40px] rounded-full">
                 <img src={user} alt="" className="w-full h-full rounded-full" />
@@ -143,7 +143,7 @@ const [event, setevent]  = useState(null)
         </div>
         {menu && <MobileCard />}
       </div>
-      <MainEvent event={event}/>
+      <MainEvent event={event} id={id}/>
       <Subscribe />
       <Footer />
     </div>

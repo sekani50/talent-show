@@ -7,7 +7,7 @@ const MobileCard = () => {
   const navigate = useNavigate()
   const {currentUser} = useSelector((state) => state.user)
   return (
-    <div className="w-full top-[60px] fixed z-[20] text-zinc-700 inset-x-0 h-fit">
+    <div className="w-full block sm:hidden top-[60px] fixed z-[20] text-zinc-700 inset-x-0 h-fit">
       <div className="w-[95%] mx-auto flex flex-col h-fit bg-white rounded-sm let swipeIn py-2 ">
      
         <Link
@@ -45,7 +45,7 @@ const MobileCard = () => {
               <div className="w-[40px] h-[40px] rounded-full">
                 <img src={user} alt="" className="w-full h-full rounded-full" />
               </div>
-              <div className="text-white">{currentUser?.firstName}</div>
+              <div className="text-black">{currentUser?.firstName}</div>
             </div>
           ) : (
             <button

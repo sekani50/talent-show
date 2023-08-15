@@ -102,7 +102,7 @@ const OnBoarding = () => {
       onClick={() => {
         navigate("/profile")
       }}
-       className="cursor-pointer flex space-x-3 items-center">
+      className="cursor-pointer hidden sm:flex space-x-3 items-center">
         <div className="w-[40px] h-[40px] rounded-full">
             <img src={user} alt="" className="w-full h-full rounded-full"/>
         </div>

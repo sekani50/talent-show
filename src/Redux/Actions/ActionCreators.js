@@ -38,7 +38,7 @@ const LoginAction = (loginParams, navigate, setLoading) => {
         const { accessToken, user } = res.data.data;
         dispatch(GetUsersSuccess(user));
         dispatch(loginSuccess(accessToken.token));
-        if (user.fullName) {
+        if (user.stageName) {
           navigate("/");
         }
         else {

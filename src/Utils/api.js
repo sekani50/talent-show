@@ -34,14 +34,7 @@ export const getUsers = (token) => {
     },
   });
 };
-//
-export const updateProfile = (token, payload) => {
-  return axios.put(`/profile`, payload, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-};
+
 
 // /password/change
 export const changePassword = (token, payload) => {
@@ -88,3 +81,30 @@ export const contest = (id, payload, token) => {
     },
   });
 };
+
+////user/update-profile
+export const updateProfile = (token, payload) => {
+  return axios.put(`/user/update-profile`, payload), {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  }
+} 
+
+///events/:eventID/participants?page=1
+export const eventParticipants =(token,eventId, page) => {
+  return axios.get(`/events/${eventId}/participants?page=${page}`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+}
+
+////user/participants/:userId
+export const singleParticipant = (token, userId) => {
+  return axios.get(`/user/participants/${userId}`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+}

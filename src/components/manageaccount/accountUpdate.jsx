@@ -10,6 +10,7 @@ const UpdateAccount = () => {
   const [email, setEmail] = useState(currentUser?.email);
   const [phone, setPhone] = useState(currentUser?.phoneNumber);
   const [name, setName] = useState(currentUser?.firstName);
+  const [fullName, setFullName] = useState(currentUser?.fullName)
   const [lastname, setLastName] = useState(currentUser?.lastName);
   const navigate = useNavigate();
   const [city, setCity] = useState("");
@@ -32,6 +33,12 @@ const UpdateAccount = () => {
   },[])
   return (
     <div className="w-full mx-auto md:mx-0 grid lg:gap-6 grid-cols-1 lg:grid-cols-2 py-3">
+       <Input
+        label={"Full Name"}
+        type={"name"}
+        value={fullName}
+        setValue={setFullName}
+      />
       <Input
         label={"First Name"}
         type={"name"}
