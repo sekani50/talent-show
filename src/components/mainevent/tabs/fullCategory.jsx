@@ -67,7 +67,7 @@ const FullCategory = ({ setactive ,filtercat, id}) => {
             >
               <div className="w-full h-[160px] sm:h-[160px] md:h-[180px] xl:h-[220px] rounded-t-sm">
                 <img
-                  src={participant?.image?.url || user}
+                  src={participant?.profileImage?.url || user}
                   alt="aa"
                   className="w-full h-full bg-cover rounded-t-sm"
                 />
@@ -76,8 +76,12 @@ const FullCategory = ({ setactive ,filtercat, id}) => {
               <p className="text-[#0C071E] font-semibold">{`${participant?.firstName} ${participant?.lastName}`}</p>
                     <p className="text-[#0C071E] ">{`as ${category}`}</p>
                 <button
-                  onClick={() => {
-                    navigate(`/voting/${participant?._id}`);
+                 onClick={() => {
+                  navigate(`/voting/${participant?._id}`, {
+                    state: {
+                      eventId:id
+                    }
+                  })
                   }}
                   className="text-white py-2 rounded-sm bg-[#0C071E] w-full text-center "
                 >

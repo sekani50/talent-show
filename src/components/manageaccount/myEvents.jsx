@@ -1,13 +1,20 @@
 import React from "react";
 import austin from "../../assets/png/austin.png";
 import { useNavigate } from "react-router-dom";
-const MyEvents = () => {
+const MyEvents = ({event}) => {
   const navigate = useNavigate();
+
+  console.log(event)
   return (
     <div className="w-full mx-auto md:mx-0 space-y-2 sm:space-y-3 py-3">
-      <div className="w-full space-x-1 flex items-center">
+   {
+    event?.map(({event}, idx) => {
+      return (
+        <div 
+        key={idx}
+        className="w-full space-x-1 flex items-center">
         <div className="h-[85px] hidden sm:block overflow-hidden bg-black rounded-sm w-[50px] sm:w-[90px] p-1 border-r border-white">
-          <img src={austin} alt="" className="w-full h-full object-cover " />
+          <img src={event?.coverImage?.url} alt="" className="w-full h-full object-cover " />
         </div>
         <div className="w-full  bg-black rounded-sm flex items-center p-2 justify-between">
           <div className="text-start">
@@ -33,6 +40,9 @@ const MyEvents = () => {
           </button>
         </div>
       </div>
+      )
+    })
+ }
     </div>
   );
 };

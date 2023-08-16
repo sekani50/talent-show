@@ -25,7 +25,7 @@ const [event, setevent]  = useState(null)
       await singleEvent(id)
         .then((res) => {
           console.log(res);
-          setevent(res.data)
+          setevent(res.data.data)
         })
         .catch((err) => {
           console.log(err);

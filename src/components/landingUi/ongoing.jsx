@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
+import axios from "../../Utils/useAxios"
 const Ongoing = () => {
   const [data, setdata] = useState([]);
   const { token } = useSelector((state) => state.user);
@@ -11,11 +12,11 @@ const Ongoing = () => {
 
   useEffect(() => {
     async function loadevents() {
-      await getEvents(1)
+      await axios.get(`/events/ongoing-events`)
         .then((res) => {
           console.log(res);
           const { data } = res.data;
-          setdata(data);
+          setdata(data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -48,7 +49,7 @@ const Ongoing = () => {
       <div className="w-full grid grid-cols-1 md:grid-cols-3 items-start md:gap-20 gap-5">
         <div className="hidden md:block space-y-3">
           <p className="text-lg font-semibold">Stage Time</p>
-          {data?.map(({ eventName }, idx) => {
+          {data?.length !== 0 && data?.map(({ eventName }, idx) => {
             if (idx <= 4) {
               return <p key={idx}>{eventName}</p>;
             }
@@ -57,7 +58,7 @@ const Ongoing = () => {
         </div>
 
         <div className="col-span-2 space-y-4">
-          {data?.map(({ eventName, _id, coverImage, categories }, j) => {
+          {data?.length !== 0 && data?.map(({ eventName, _id, coverImage, categories }, j) => {
             if (j <= 4) {
               return (
                 <div

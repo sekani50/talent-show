@@ -103,7 +103,7 @@ const Voting = () => {
               className="cursor-pointer hidden sm:flex space-x-3 items-center"
             >
               <div className="w-[40px] h-[40px] rounded-full">
-                <img src={user} alt="" className="w-full h-full rounded-full" />
+                <img src={currentUser?.profileImage?.url || user} alt="" className="w-full h-full rounded-full" />
               </div>
               <div className="text-white">{currentUser?.firstName}</div>
             </div>

@@ -82,7 +82,7 @@ export const contest = (id, payload, token) => {
   });
 };
 
-////user/update-profile
+////user/update-profile /user/update-profile
 export const updateProfile = (token, payload) => {
   return axios.put(`/user/update-profile`, payload), {
     headers: {
@@ -91,7 +91,16 @@ export const updateProfile = (token, payload) => {
   }
 } 
 
-///events/:eventID/participants?page=1
+export const imageUpload = (token, payload) => {
+  return axios.post(`/upload-image`, payload, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
+
+
+///events/:eventID/participants?page=1 /events/:eventID/participants
 export const eventParticipants =(token,eventId, page) => {
   return axios.get(`/events/${eventId}/participants?page=${page}`, {
     headers: {
@@ -101,8 +110,8 @@ export const eventParticipants =(token,eventId, page) => {
 }
 
 ////user/participants/:userId
-export const singleParticipant = (token, userId) => {
-  return axios.get(`/user/participants/${userId}`, {
+export const singleParticipant = (token,eventId, userId) => {
+  return axios.get(`/events/${eventId}/participants/${userId}`, {
     headers: {
       Authorization: "Bearer " + token,
     },

@@ -3,18 +3,20 @@ import Input from "./input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUsers } from "../../Utils/api";
+import axios from "../../Utils/useAxios"
+import { getUsers, updateProfile, imageUpload } from "../../Utils/api";
 import { GetUsersSuccess } from "../../Redux/Actions/ActionCreators";
-const UpdateAccount = () => {
+import { LoaderIcon } from "lucide-react";
+import {toast} from 'react-hot-toast'
+const UpdateAccount = ({upload}) => {
   const {token, currentUser} = useSelector((state) => state.user)
-  const [email, setEmail] = useState(currentUser?.email);
   const [phone, setPhone] = useState(currentUser?.phoneNumber);
-  const [name, setName] = useState(currentUser?.firstName);
-  const [fullName, setFullName] = useState(currentUser?.fullName)
-  const [lastname, setLastName] = useState(currentUser?.lastName);
+  const [firstName, setName] = useState(currentUser?.firstName);
+  const [loading, setloading] = useState(false)
+  const [lastName, setlastName] = useState(currentUser?.lastName);
   const navigate = useNavigate();
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
+  const [city, setCity] = useState(currentUser?.city);
+  const [country, setCountry] = useState(currentUser?.country);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const UpdateAccount = () => {
       .then((res) => {
         //console.log(res)
         const {data} = res.data
-        dispatch(GetUsersSuccess(data))
+        dispatch(GetUsersSuccess(data?.user))
       })
       .catch((err) => {
         console.log(err)
@@ -31,37 +33,71 @@ const UpdateAccount = () => {
     }
     getDetails()
   },[])
+
+
+  async function handleSubmit() {
+    let profileImage;
+    const formdatas = new FormData();
+    formdatas.append("image", upload);
+ 
+    await imageUpload(token, formdatas)
+      .then((res) => {
+        console.log(res);
+        //setIsImage(true);
+      
+        profileImage = res.data.data;
+        toast.success("Image successfully uploaded");
+      })
+      .catch((err) => {
+        console.log(err);
+      
+        toast.error("Image not uploaded");
+      });
+
+    const payload = {
+      firstName,
+      lastName,
+      city,
+      country,phoneNumber:phone,
+      profileImage
+    }
+
+    setloading(true)
+   {profileImage && await axios.put(`/user/update-profile`,payload, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then((res) => {
+      console.log(res)
+      setloading(false)
+      window.location.reload()
+    })
+    .catch((err) => {
+      console.log(err)
+      setloading(false)
+    })}
+  }
   return (
     <div className="w-full mx-auto md:mx-0 grid lg:gap-6 grid-cols-1 lg:grid-cols-2 py-3">
-       <Input
-        label={"Full Name"}
-        type={"name"}
-        value={fullName}
-        setValue={setFullName}
-      />
+     
       <Input
         label={"First Name"}
         type={"name"}
-        value={name}
+        value={firstName}
         setValue={setName}
       />
       <Input
         label={"Last Name"}
         type={"name"}
-        value={lastname}
-        setValue={setLastName}
+        value={lastName}
+        setValue={setlastName}
       />
       <Input
         label={"Mobile Number"}
         type={"number"}
         value={phone}
         setValue={setPhone}
-      />
-      <Input
-        label={"Email Address"}
-        type={"email"}
-        value={email}
-        setValue={setEmail}
       />
 
       <Input
@@ -78,8 +114,10 @@ const UpdateAccount = () => {
         setValue={setCity}
       />
       <div className="w-full items-end justify-end col-span-full">
-        <button className="w-fit px-6 h-[45px] text-white rounded-sm bg-[#017297]">
-          Update Profile
+        <button
+        onClick={handleSubmit}
+        className="flex items-center justify-center w-[120px] h-[45px] text-white rounded-sm bg-[#017297]">
+          {loading ? <LoaderIcon className="text-[22px] animate-spin"/> : 'Update Profile'}
         </button>
       </div>
     </div>

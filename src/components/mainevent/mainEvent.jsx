@@ -42,7 +42,6 @@ const MainEvent = ({ event, id }) => {
         <Participants
           event={event}
           id={id}
-         
           setfiltercat={setfiltercat}
           setactive={setactive}
         />

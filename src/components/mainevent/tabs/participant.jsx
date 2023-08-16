@@ -84,14 +84,18 @@ const Participants = ({setactive, setfiltercat, id}) => {
                 key={j}
                 className="w-full h-[280px] bg-[#FD6EBB] overflow-hidden sm:h-[280px] md:h-[300px] xl:h-[350px] rounded-sm">
                 <div className="w-full h-[160px] sm:h-[160px] md:h-[180px] xl:h-[220px] rounded-t-sm">
-                    <img src={participant?.image?.url || user} alt="aa"  className="w-full h-full bg-cover rounded-t-sm"/>
+                    <img src={participant?.profileImage?.url || user} alt="aa"  className="w-full h-full bg-cover rounded-t-sm"/>
                 </div>
                 <div className="w-full space-y-2 px-4 py-4 text-center">
                     <p className="text-[#0C071E] font-semibold">{`${participant?.firstName} ${participant?.lastName}`}</p>
                     <p className="text-[#0C071E] ">{`as ${category}`}</p>
                     <button
                     onClick={() => {
-                    navigate(`/voting/${participant?._id}`)
+                    navigate(`/voting/${participant?._id}`, {
+                      state: {
+                        eventId:id
+                      }
+                    })
                     }}
                     className="text-white py-2 rounded-sm bg-[#0C071E] w-full text-center ">Vote</button>
 
