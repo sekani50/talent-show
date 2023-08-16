@@ -1,6 +1,7 @@
 import React from "react";
 import austin from "../../assets/png/austin.png";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../Utils/stringtoDate";
 const MyEvents = ({event}) => {
   const navigate = useNavigate();
 
@@ -8,7 +9,7 @@ const MyEvents = ({event}) => {
   return (
     <div className="w-full mx-auto md:mx-0 space-y-2 sm:space-y-3 py-3">
    {
-    event?.map(({event}, idx) => {
+    event?.map(({category,event}, idx) => {
       return (
         <div 
         key={idx}
@@ -18,21 +19,19 @@ const MyEvents = ({event}) => {
         </div>
         <div className="w-full  bg-black rounded-sm flex items-center p-2 justify-between">
           <div className="text-start">
-            <div className="font-semibold text-white">Stage Time</div>
-            <div className="p-1 text-[11px] sm:text-[13px] rounded-sm bg-[#FFCC15]">female category</div>
-            <div className="text-[11px] text-white sm:text-[13px]">
-              as Best Female Artist
-            </div>
+            <div className="font-semibold text-white">{event?.eventName}</div>
+            <div className="p-1 text-[11px] sm:text-[13px] text-center rounded-sm bg-[#FFCC15]">{category}</div>
+           
           </div>
 
           <div className="text-white text-center">
-            <div>Sun</div>
-            <div className="font-semibold text-lg">June</div>
-            <div>2023</div>
+            <div>{formatDate(event?.contestStart).dayOfWeek}</div>
+            <div className="font-semibold text-lg">{formatDate(event?.contestStart).month}</div>
+            <div>{formatDate(event?.contestStart).year}</div>
           </div>
           <button
             onClick={() => {
-              navigate("/event/0");
+              navigate(`/event/${event?._id}`);
             }}
             className="text-white bg-[#017297] rounded-sm px-4 sm:px-8 py-2"
           >

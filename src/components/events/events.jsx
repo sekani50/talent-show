@@ -26,7 +26,7 @@ const Events = () => {
           console.log(res);
           setloading(false);
           const { data, paging } = res.data;
-          setdata(data);
+          setdata(data?.data);
           const totalPage = Math.ceil(paging?.totalItems / 10);
           console.log(totalPage);
           // setcurrentPage(paging?.currentPage);

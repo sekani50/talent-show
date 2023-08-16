@@ -17,13 +17,13 @@ const Participants = ({setactive, setfiltercat, id}) => {
         await eventParticipants(token, id, page)
         .then((res) => {
           console.log(res.data.data)
-          const {data, paging} = res.data
+          const {data} = res.data
           setloading(false)
-          const totalPage = Math.ceil(paging?.totalItems / 10);
+          const totalPage = Math.ceil(data?.paging?.totalItems / 10);
           console.log(totalPage);
-          const allcat = data?.map((val) => val.category).filter((val) => val !== undefined)
+          const allcat = data.data?.map((val) => val.category).filter((val) => val !== undefined)
           setallCat(allcat)
-          setdata(data)
+          setdata(data.data)
           
           
           if(page < totalPage) {

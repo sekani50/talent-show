@@ -52,7 +52,7 @@ const MobileCard = () => {
               onClick={() => {
                 navigate("/register");
               }}
-              className="hidden sm:block px-6 py-2 rounded-sm border border-gray-300"
+              className=" px-6 py-2 rounded-sm border border-gray-300"
             >
               Join us
             </button>

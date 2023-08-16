@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-const Profile = () => {
+const Profile = ({data}) => {
   const [active, setactive] = useState(0);
   return (
     <div className="w-full space-y-4 sm:space-y-6 h-fit">
@@ -34,33 +34,16 @@ const Profile = () => {
       }
 
       {active === 0 && (
-        <div className="flex flex-wrap text-white justify-start">
-          Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo
-          tellus amet. Ut placerat dolor massa metus quisque sodales semper. Hac
-          donec vulputate pharetra augue eu congue. Lorem ipsum dolor sit amet
-          consectetur. Sit curabitur nulla justo tellus amet. Ut placerat dolor
-          massa metus quisque sodales semper. Hac donec vulputate pharetra augue
-          eu congue. Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla
-          justo tellus amet. Ut placerat dolor massa metus quisque sodales
-          semper. Hac donec vulputate pharetra augue eu congue. Lorem ipsum
-          dolor sit amet consectetur. Sit curabitur nulla justo tellus amet. Ut
-          placerat dolor massa metus quisque sodales semper. Hac donec vulputate
-          pharetra augue eu congue.
+        <div className="flex space-y-2 flex-col text-white justify-start">
+          <p>Stage Name: <span>{data?.participant?.stageName}</span></p>
+          <p>Email: <span>{data?.participant?.email}</span></p>
+          <p>City: <span>{data?.participant?.city}</span></p>
+          <p>Country: <span>{data?.participant?.country}</span></p>
         </div>
       )}
        {active === 1 && (
-        <div className="flex flex-wrap text-white  justify-start">
-          Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla justo
-          tellus amet. Ut placerat dolor massa metus quisque sodales semper. Hac
-          donec vulputate pharetra augue eu congue. Lorem ipsum dolor sit amet
-          consectetur. Sit curabitur nulla justo tellus amet. Ut placerat dolor
-          massa metus quisque sodales semper. Hac donec vulputate pharetra augue
-          eu congue. Lorem ipsum dolor sit amet consectetur. Sit curabitur nulla
-          justo tellus amet. Ut placerat dolor massa metus quisque sodales
-          semper. Hac donec vulputate pharetra augue eu congue. Lorem ipsum
-          dolor sit amet consectetur. Sit curabitur nulla justo tellus amet. Ut
-          placerat dolor massa metus quisque sodales semper. Hac donec vulputate
-          pharetra augue eu congue.
+        <div className="flex space-y-2 flex-col text-white  justify-start">
+       <p>Portfolio link: <span>{data?.participant?.portfolio}</span></p>
         </div>
       )}
     </div>

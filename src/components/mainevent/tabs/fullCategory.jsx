@@ -16,11 +16,11 @@ const FullCategory = ({ setactive ,filtercat, id}) => {
       await eventParticipants(token, id, page)
       .then((res) => {
         console.log(res.data.data)
-        const {data, paging} = res.data
+        const {data} = res.data
         setloading(false)
-        const totalPage = Math.ceil(paging?.totalItems / 10);
+        const totalPage = Math.ceil(data?.paging?.totalItems / 10);
         console.log(totalPage);
-        const filter = data?.filter((val) => val.category === filtercat)
+        const filter = data?.data?.filter((val) => val.category === filtercat)
         setdata(filter)
         
         if(page < totalPage) {

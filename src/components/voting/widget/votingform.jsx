@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 import { voting } from "../../../Utils/api";
 import { toast } from "react-hot-toast";
 import { LoaderIcon } from "lucide-react";
-const VotingForm = () => {
-  const { token, currentUser } = useSelector((state) => state.user);
+const VotingForm = ({ eventId, userId }) => {
+  const { token } = useSelector((state) => state.user);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhone] = useState("");
   const [numberOfVotes, setNum] = useState("");
   const [loading, setloading] = useState(false);
-  const eventId = 1;
 
   async function voteParticipant() {
     const payload = {
@@ -28,10 +27,12 @@ const VotingForm = () => {
       }
     }
     setloading(true);
-    await voting(token, eventId, currentUser?._id, payload)
+    await voting(token, eventId, userId, payload)
       .then((res) => {
         console.log(res);
         setloading(false);
+        window.location.reload();
+        toast.success("Voting Successfull");
       })
       .catch((err) => {
         console.log(err);
@@ -112,7 +113,7 @@ const VotingForm = () => {
 
       <button
         onClick={voteParticipant}
-        className="text-white h-[45px] w-full rounded-sm bg-[#017297]"
+        className="text-white h-[45px] w-full items-center justify-center flex rounded-sm bg-[#017297]"
       >
         {loading ? (
           <LoaderIcon className="text-[22px] animate-spin" />

@@ -109,7 +109,7 @@ export const eventParticipants =(token,eventId, page) => {
   })
 }
 
-////user/participants/:userId
+////user/participants/:userId 
 export const singleParticipant = (token,eventId, userId) => {
   return axios.get(`/events/${eventId}/participants/${userId}`, {
     headers: {
@@ -117,3 +117,9 @@ export const singleParticipant = (token,eventId, userId) => {
     },
   })
 }
+
+///
+export const onGoing = () => {
+  return axios.get("/events/ongoing-events")
+}
+
