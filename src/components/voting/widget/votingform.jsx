@@ -31,7 +31,7 @@ const VotingForm = ({ eventId, userId }) => {
       .then((res) => {
         console.log(res);
         setloading(false);
-        window.location.reload();
+        window.location.href=res.data
         toast.success("Voting Successfull");
       })
       .catch((err) => {

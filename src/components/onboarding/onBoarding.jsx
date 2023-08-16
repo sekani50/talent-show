@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
@@ -12,7 +12,7 @@ import { actionVideo, contest } from "../../Utils/api";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { LoaderIcon } from "lucide-react";
-import user from "../../assets/png/customerpic.png"
+import user from "../../assets/png/customerpic.png";
 const OnBoarding = () => {
   const { state, pathname } = useLocation();
   const [loading, setloading] = useState(false);
@@ -28,14 +28,17 @@ const OnBoarding = () => {
   const navigate = useNavigate();
   const [checkprofile, setcheckprofile] = useState(false);
   const { token, currentUser } = useSelector((state) => state.user);
-
+  const [redirect, setredirect] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState("");
 
+  useEffect(() => {
+    if (redirect) {
+      window.location.href = redirect;
+    }
+  }, []);
   async function handleSubmit() {
-   
- console.log(uploadedVideo);
+    console.log(uploadedVideo);
     setloading(true);
-   
 
     const formdata = new FormData();
     if (checkprofile) {
@@ -57,9 +60,10 @@ const OnBoarding = () => {
         (await contest(state?.data?.id, formdata, token)
           .then((res) => {
             toast.success("Successfully onboard");
-            console.log(res);
+            console.log(res.data);
             setloading(false);
-            window.location.reload()
+            //setredirect(res.data);
+             window.location.href=res.data
           })
           .catch((err) => {
             console.log(err);
@@ -76,7 +80,7 @@ const OnBoarding = () => {
               toast.error(mm);
             }
             setloading(false);
-           // window.location.reload()
+            // window.location.reload()
           }));
     }
   }
@@ -93,21 +97,46 @@ const OnBoarding = () => {
           <img src={next} alt="dd" className="w-full h-full" />
         </div>
         <div className="hidden space-x-4 sm:space-x-8 sm:flex items-center">
-        <Link to="/about" className={`${pathname.includes('about') ? 'font-semibold' : ''}`}>About us</Link>
-          <Link to="/event" className={`${pathname.includes('event') ? 'font-semibold' : ''}`}>Event</Link>
-          <Link to="/faq" className={`${pathname.includes('faq') ? 'font-semibold' : ''}`}>FAQ</Link>
-          <Link to="/contact" className={`${pathname.includes('contact') ? 'font-semibold' : ''}`}>Contact</Link>
+          <Link
+            to="/about"
+            className={`${pathname.includes("about") ? "font-semibold" : ""}`}
+          >
+            About us
+          </Link>
+          <Link
+            to="/event"
+            className={`${pathname.includes("event") ? "font-semibold" : ""}`}
+          >
+            Event
+          </Link>
+          <Link
+            to="/faq"
+            className={`${pathname.includes("faq") ? "font-semibold" : ""}`}
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/contact"
+            className={`${pathname.includes("contact") ? "font-semibold" : ""}`}
+          >
+            Contact
+          </Link>
         </div>
-      <div
-      onClick={() => {
-        navigate("/profile")
-      }}
-      className="cursor-pointer hidden sm:flex space-x-3 items-center">
-        <div className="w-[40px] h-[40px] rounded-full">
-            <img src={currentUser?.profileImage?.url || user} alt="" className="w-full h-full rounded-full"/>
-        </div>
+        <div
+          onClick={() => {
+            navigate("/profile");
+          }}
+          className="cursor-pointer hidden sm:flex space-x-3 items-center"
+        >
+          <div className="w-[40px] h-[40px] rounded-full">
+            <img
+              src={currentUser?.profileImage?.url || user}
+              alt=""
+              className="w-full h-full rounded-full"
+            />
+          </div>
           <div className="text-white">{currentUser?.firstName}</div>
-      </div>
+        </div>
         <div
           onClick={() => {
             showmenu(!menu);
