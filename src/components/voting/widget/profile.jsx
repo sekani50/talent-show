@@ -41,6 +41,7 @@ const Profile = ({data}) => {
           <p>Country: <span>{data?.participant?.country}</span></p>
         </div>
       )}
+      
        {active === 1 && (
         <div className="flex space-y-2 flex-col text-white  justify-start">
        <p>Portfolio link: <span>{data?.participant?.portfolio}</span></p>
