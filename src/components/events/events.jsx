@@ -130,8 +130,8 @@ const Events = () => {
           </div>
         )}
         {loading && data?.length === 0 && (
-          <div className=" w-full h-[300px] flex items-center justify-center">
-            <div className="">-No event-</div>
+          <div className=" w-full col-span-full h-[300px] flex items-center justify-center">
+            <div className="text-gray-500">-No event-</div>
           </div>
         )}
 

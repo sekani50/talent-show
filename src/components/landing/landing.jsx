@@ -117,7 +117,16 @@ const Landing = () => {
             </h2>
           </div>
           <div className="flex justify-start items-start space-x-4 sm:space-x-8">
-            <button className="py-2 rounded-sm px-6 bg-gray-200">Join Us</button>
+            <button 
+            onClick={() => {
+              if (currentUser) {
+                navigate("/profile");
+              }
+              else {
+                navigate("/register");
+              }
+            }}
+            className="py-2 rounded-sm px-6 bg-gray-200">Join Us</button>
             <div
             onClick={scroll}
             className="flex cursor-pointer text-white space-x-3 items-center">

@@ -54,18 +54,18 @@ const Voting = () => {
 
           <div className="text-white space-y-3 self-end">
             <div>
-              <p>{`${data?.participant?.firstName} ${data?.participant?.lastName}`}</p>
-              <p className="text-[11px] sm:text-[13px]">{data?.category}</p>
+              <p>{`${data?.participant?.firstName || ''} ${data?.participant?.lastName || ''}`}</p>
+              <p className="text-[11px] sm:text-[13px]">{data?.category || ''}</p>
             </div>
 
             <div className="font-semobold">
               <p>Total number of votes </p>
               <p className="text-[#017297] text-base sm:text-lg">
-                {data?.votes}
+                {data?.participant?.votes || '0'}
               </p>
               <p className="uppercase text-[#FFCC15]">{`voting ends by ${
                 formatDate(data?.event?.contestEnd)?.dayOfWeek
-              }, ${formatDate(data?.event?.contestEnd)?.month} at 12:58`}</p>
+              || ''}, ${formatDate(data?.event?.contestEnd)?.month || ''} at 12:58`}</p>
             </div>
           </div>
         </div>
