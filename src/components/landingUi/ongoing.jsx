@@ -18,7 +18,7 @@ const Ongoing = () => {
     const cards = document.querySelectorAll('.card')
     const observer = new IntersectionObserver(entries => {
       entries.forEach((entry, index) => {
-        setactive(index)
+        //setactive(index)
         entry.target.classList.toggle("show", entry.isIntersecting)
       })
     })
@@ -73,7 +73,7 @@ const Ongoing = () => {
           {data?.length !== 0 &&
             data?.map(({ eventName }, idx) => {
               if (idx <= 4) {
-                return <p className={`${active === idx ? 'font-semibold ': ''}`} key={idx}>{eventName}</p>;
+                return <p className={`${active === idx ? ' ': ''}`} key={idx}>{eventName}</p>;
               }
               return null;
             })}
