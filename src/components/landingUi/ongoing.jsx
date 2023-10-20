@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {motion} from "framer-motion";
+import MainEvent from "../mainevent/mainEvent";
 import { toast } from "react-hot-toast";
 import axios from "../../Utils/useAxios";
 import { formatDate } from "../../Utils/stringtoDate";
@@ -46,7 +47,7 @@ const Ongoing = () => {
         .then((res) => {
           console.log(res);
           const { data } = res.data;
-          setdata(data.data);
+          setdata(data);
         })
         .catch((err) => {
           console.log(err);
@@ -55,6 +56,7 @@ const Ongoing = () => {
     loadevents();
   }, []);
 
+  //console.log(data)
   function joinEvent(id, eventName, categories) {
     if (!token) {
       toast.error("Log in or register to join the event");
@@ -81,7 +83,7 @@ const Ongoing = () => {
           <p className="text-center">A show brought to you by NextGen</p>
           <button
             onClick={() => {
-              joinEvent(data._id, data?.eventName, data?.categories)
+              joinEvent(data?._id, data?.eventName, data?.categories)
             }}
             className="text-[#017297] bg-white rounded-sm px-4 sm:px-8 py-2"
           >
@@ -91,7 +93,7 @@ const Ongoing = () => {
           {`  Registration Ends by ${formatDate(data?.contestEnd).month || ''} ${formatDate(data?.contestEnd).year || ''}`}
           </p>
         </div>
-     
+          <MainEvent event={data} id={data?._id}/>
     </div>
   );
 };
