@@ -12,7 +12,7 @@ const FeedBack = () => {
         What people say about us
       </h1>
 
-      <div className="grid grid-cols-1 w-full items-center px-4 sm:px-20 gap-6 md:gap-10 md:grid-cols-3">
+      <div className="grid grid-cols-1 w-full items-center px-4 sm:px-20 gap-6 md:gap-10 md:grid-cols-2 lg:grid-cols-3">
       {reviews.map((r, i) => {
         const {content, reviewer, talent} = r
         return (
