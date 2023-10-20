@@ -73,7 +73,7 @@ const Ongoing = () => {
     });
   }
   return (
-    <div className="bg-image px-4 sm:px-20 py-6 space-y-6 sm:space-y-14 text-white">
+    <div className="bg-main px-4 sm:px-20 py-6 space-y-6 sm:space-y-14 text-white">
       <h1 className="text-center text-lg sm:text-2xl font-semibold">
         Ongoing Events
       </h1>

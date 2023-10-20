@@ -7,7 +7,7 @@ const MainEvent = ({ event, id }) => {
   const [active, setactive] = useState(0);
   const [filtercat, setfiltercat] = useState("");
   return (
-    <div className="w-full py-6 bg-main px-4 sm:px-20 space-y-6 sm:space-y-8 sm:py-8">
+    <div className="w-full py-6 px-4 sm:px-20 space-y-6 sm:space-y-8 sm:py-8">
       {active !== 2 && (
         <div className="flex items-center space-x-4">
           <div
