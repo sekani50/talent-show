@@ -101,12 +101,8 @@ export const imageUpload = (token, payload) => {
 
 
 ///events/:eventID/participants?page=1 /events/:eventID/participants
-export const eventParticipants =(token,eventId, page) => {
-  return axios.get(`/events/${eventId}/participants?page=${page}`, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  })
+export const eventParticipants =(eventId) => {
+  return axios.get(`/events/${eventId}/participants`)
 }
 
 ////user/participants/:userId 
@@ -123,3 +119,11 @@ export const onGoing = () => {
   return axios.get("/events/ongoing-events")
 }
 
+export function eventCategories(eventId, page) {
+  return axios.get(`/categories/event/${eventId}?page=${page}`)
+}
+
+
+export function singleCategory(catId) {
+  return axios.get(`/categories/${catId}`)
+}

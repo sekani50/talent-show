@@ -17,7 +17,7 @@ const AboutEvent = ({ event }) => {
         {event?.description}
       </div>
 
-      <div className="w-full relative z-[100] sm:w-[600px] h-[165px] sm:h-[400px] rounded-sm">
+      <div className="w-full relative z-[100] mx-auto sm:w-[600px] h-[165px] sm:h-[400px] rounded-sm">
         <video
           controls
           src={event?.video?.url}

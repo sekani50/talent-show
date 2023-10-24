@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import AboutEvent from "./tabs/aboutEvent";
 import Participants from "./tabs/participant";
 import FullCategory from "./tabs/fullCategory";
+import CategroyDetail from "./tabs/categoryDetail";
 
 const MainEvent = ({ event, id }) => {
   const [active, setactive] = useState(0);
+  const [catId, setcatId] = useState('')
   const [filtercat, setfiltercat] = useState("");
   return (
     <div className="w-full py-6 px-4 sm:px-20 space-y-6 sm:space-y-8 sm:py-8">
-      {active !== 2 && (
+      {active < 3 && (
         <div className="flex items-center space-x-4">
           <div
             onClick={() => {
@@ -34,6 +36,19 @@ const MainEvent = ({ event, id }) => {
           >
             Participants
           </div>
+
+          <div
+            onClick={() => {
+              setactive(2);
+            }}
+            className={`font-medium py-2 cursor-pointer ${
+              active === 2
+                ? "text-[#017297] border-b-2 border-[#017297]"
+                : "text-white"
+            }`}
+          >
+            Categories
+          </div>
         </div>
       )}
 
@@ -52,8 +67,13 @@ const MainEvent = ({ event, id }) => {
           id={id}
           filtercat={filtercat}
           setactive={setactive}
+          setCatId={setcatId}
         />
       )}
+      {active === 3 && <CategroyDetail
+      setactive={setactive}
+      id={catId}
+      />}
     </div>
   );
 };

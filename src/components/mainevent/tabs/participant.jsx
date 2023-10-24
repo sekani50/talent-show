@@ -14,7 +14,7 @@ const Participants = ({ setactive, setfiltercat, id }) => {
   useEffect(() => {
     async function allParticipant() {
       setloading(true);
-      await eventParticipants(token, id, page)
+      await eventParticipants(id)
         .then((res) => {
           console.log(res.data.data);
           const { data } = res.data;
