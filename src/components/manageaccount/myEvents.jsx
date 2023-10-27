@@ -1,11 +1,9 @@
 import React from "react";
-import austin from "../../assets/png/austin.png";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../Utils/stringtoDate";
 const MyEvents = ({event}) => {
   const navigate = useNavigate();
 
-  console.log(event)
   return (
     <div className="w-full mx-auto md:mx-0 space-y-2 sm:space-y-3 py-3">
    {

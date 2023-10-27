@@ -3,7 +3,7 @@ import { MdFilter, MdSearch } from "react-icons/md";
 import user from "../../../assets/png/customerpic.png";
 import { useNavigate } from "react-router-dom";
 import { eventParticipants } from "../../../Utils/api";
-import { useSelector } from "react-redux";
+
 const Participants = ({ setactive, setfiltercat, id }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);

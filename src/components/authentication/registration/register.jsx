@@ -10,7 +10,6 @@ import { LoaderIcon } from "lucide-react";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
-  AiOutlineArrowLeft,
 } from "react-icons/ai";
 const Register = () => {
   const [email, setEmail] = useState("");
