@@ -97,9 +97,9 @@ const LoginOnBoarding = () => {
       }
     }
     setLoading(true);
-    {
-      docUrl &&
-        (await onboarding(token, payload)
+  if ( docUrl )  {
+     
+        await onboarding(token, payload)
           .then((res) => {
             console.log(res);
             setLoading(false);
@@ -110,7 +110,7 @@ const LoginOnBoarding = () => {
             console.log(err);
             setLoading(false);
             toast.error("Onboarding not successful");
-          }));
+          })
     }
   };
   return (

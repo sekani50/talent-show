@@ -99,9 +99,9 @@ const UpdateAccount = ({ upload }) => {
     };
 
     setloading(true);
-    {
-      profileImage &&
-        (await axios
+    
+      if (profileImage ) {
+        await axios
           .put(`/user/update-profile`, payload, {
             headers: {
               Authorization: "Bearer " + token,
@@ -132,8 +132,10 @@ const UpdateAccount = ({ upload }) => {
               toast.error(mm);
             }
             setloading(false);
-          }));
-    }
+          })
+
+        }
+    
   }
   return (
     <div className="w-full mx-auto md:mx-0 grid lg:gap-6 grid-cols-1 lg:grid-cols-2 py-3">

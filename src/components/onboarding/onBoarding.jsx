@@ -73,9 +73,9 @@ const OnBoarding = () => {
       };
     }
 
-    {
-      videoUrl &&
-        (await contest(state?.data?.id, payload, token)
+    
+     if ( videoUrl) { 
+        await contest(state?.data?.id, payload, token)
           .then((res) => {
             toast.success("Successfully onboard");
             console.log(res.data);
@@ -99,7 +99,7 @@ const OnBoarding = () => {
             }
             setloading(false);
             // window.location.reload()
-          }));
+          })
     }
   }
 
