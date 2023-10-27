@@ -37,6 +37,7 @@ const Events = () => {
       });
     }
     loadevents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function joinEvent(id, eventName, categories) {

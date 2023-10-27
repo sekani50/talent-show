@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Input from "./input";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "../../Utils/useAxios";
-import { getUsers, updateProfile, imageUpload } from "../../Utils/api";
+import { getUsers, imageUpload, getTalents, getCountries } from "../../Utils/api";
 import { GetUsersSuccess } from "../../Redux/Actions/ActionCreators";
 import { LoaderIcon } from "lucide-react";
 import { toast } from "react-hot-toast";
@@ -15,7 +15,7 @@ const UpdateAccount = ({ upload }) => {
   const [firstName, setName] = useState(currentUser?.firstName);
   const [loading, setloading] = useState(false);
   const [lastName, setlastName] = useState(currentUser?.lastName);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [city, setCity] = useState(currentUser?.city);
 
   const [activeCountry, setActiveCountry] = useState(
@@ -31,6 +31,28 @@ const UpdateAccount = ({ upload }) => {
   const [activeTalentId, setActiveTalentId] = useState(currentUser?.talent?._id);
   const dispatch = useDispatch();
 
+  
+  useEffect(() => {
+    async function getAllDropDowns() {
+      try {
+        const [allTalent, allCountries] = await Promise.all([
+          getTalents(token),
+         
+          getCountries(token),
+        ]);
+        console.log(allTalent,  allCountries);
+        getAvailableDropDowns({
+          countries: allCountries?.data?.data?.data,
+          talents: allTalent?.data?.data?.data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllDropDowns();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     async function getDetails() {
       await getUsers(token)
@@ -44,6 +66,7 @@ const UpdateAccount = ({ upload }) => {
         });
     }
     getDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleSubmit() {

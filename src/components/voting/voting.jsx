@@ -37,6 +37,7 @@ const Voting = () => {
         });
     }
     getParticipant();
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="w-full h-full   font-light overflow-x-hidden">

@@ -1,17 +1,14 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, } from "react";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
-import MainEvent from "../mainevent/mainEvent";
-import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+
+
 import axios from "../../Utils/useAxios";
-import { formatDate } from "../../Utils/stringtoDate";
+
 const Ongoing = () => {
   const [data, setdata] = useState([]);
-  const { token } = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  const [active, setactive] = useState("");
+
+ 
 
   useEffect(() => {
     if (!data) return;
@@ -48,24 +45,10 @@ const Ongoing = () => {
         });
     }
     loadevents();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //console.log(data)
-  function joinEvent(id, eventName, categories) {
-    if (!token) {
-      toast.error("Log in or register to join the event");
-      return;
-    }
-    navigate("/join", {
-      state: {
-        data: {
-          id,
-          eventName,
-          categories,
-        },
-      },
-    });
-  }
+ 
   return (
     <div className="bg-main px-4 sm:px-20 py-6 space-y-6 sm:space-y-14 ">
       <h1 className="text-center text-white text-lg sm:text-2xl font-semibold">

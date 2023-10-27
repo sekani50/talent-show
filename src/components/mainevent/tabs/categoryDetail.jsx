@@ -4,14 +4,14 @@ import { categoryParticipants, singleCategory } from "../../../Utils/api";
 import { MdNavigateBefore } from "react-icons/md";
 import { useState } from "react";
 import user from "../../../assets/png/customerpic.png";
-import { Link } from "react-router-dom";
-export default function CategroyDetail({ setactive, id }) {
+import {useNavigate } from "react-router-dom";
+export default function CategroyDetail({ eventId, setactive, id }) {
   const [loading, setloading] = useState(false);
   const [data, setdata] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [page, setPage] = useState(1);
   const [currentPage, setcurrentPage] = useState(0);
-
+  const navigate = useNavigate()
   const [totalItems, setTotalItems] = useState(0);
   useEffect(() => {
     async function single() {
@@ -39,6 +39,7 @@ export default function CategroyDetail({ setactive, id }) {
       }
     }
     single();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   console.log(participants);
@@ -83,7 +84,7 @@ export default function CategroyDetail({ setactive, id }) {
                     key={idx}
                     className="w-full h-[280px] flex flex-col gap-3 bg-[#FD6EBB] overflow-hidden sm:h-[280px] md:h-[300px] xl:h-[350px] rounded-sm"
                   >
-                    <div className="w-full h-[160px] items-center flex justify-center sm:h-[160px] md:h-[180px] xl:h-[220px] rounded-t-sm">
+                    <div className="w-full h-[160px] items-center pt-3 flex justify-center sm:h-[160px] md:h-[180px] xl:h-[220px] rounded-t-sm">
                       <img
                         src={participant?.profileImage?.url || user}
                         alt="aa"
@@ -93,12 +94,18 @@ export default function CategroyDetail({ setactive, id }) {
                     <div className="w-full flex flex-col space-y-2 px-4 py-4 text-center">
                       <p className="text-[#0C071E] font-semibold">{`${participant?.firstName}  ${participant?.lastName}`}</p>
 
-                      <Link
-                        to={`/voting/${participant?._id}`}
+                      <button
+                       onClick={() => {
+                        navigate(`/voting/${participant?._id}`, {
+                          state: {
+                            eventId
+                          }
+                        })
+                       }}
                         className="text-white py-2 rounded-sm bg-[#0C071E] w-full text-center "
                       >
                         Vote
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 );

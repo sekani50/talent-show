@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import rect from "../../assets/png/rect.png";
 import next from "../../assets/png/next.png";
-//import Loader from "../UI/Loader";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DropDowns from "../composable/dropDowns";
 import { toast } from "react-hot-toast";
@@ -60,6 +60,7 @@ const LoginOnBoarding = () => {
       }
     }
     getAllDropDowns();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleSubmit = async () => {
     let docUrl;

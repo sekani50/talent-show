@@ -32,6 +32,7 @@ const [event, setevent]  = useState(null)
         });
     }
     getEvent();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

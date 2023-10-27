@@ -1,15 +1,15 @@
 import React,{useState,useEffect} from "react";
 import next from "../../../assets/png/next.png";
 import { MdNavigateBefore } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { eventCategories } from "../../../Utils/api";
 const FullCategory = ({ setactive, id, setCatId}) => {
-  const navigate = useNavigate();
+
   const [data, setdata] = useState([])
   const [page, setPage] = useState(1)
   const [loading, setloading] = useState(false)
-  const {token} = useSelector((state) => state.user)
+  const [currentPage, setcurrentPage] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+
   useEffect(() => {
     async function eventCats() {
       setloading(true)
@@ -18,14 +18,18 @@ const FullCategory = ({ setactive, id, setCatId}) => {
         console.log(res.data.data)
         const {data} = res.data
         setloading(false)
-        const totalPage = Math.ceil(data?.paging?.totalItems / 10);
-        console.log(totalPage);
+      
        
         setdata(data?.data)
         
-        if(page < totalPage) {
-          setPage(page+1)
-        }
+        const totalPage = Math.ceil(data?.paging?.totalItems / 10);
+        console.log(totalPage);
+        setcurrentPage(data?.paging?.currentPage);
+        //  const pageNumbers = [...Array(totalPage).keys()].map(
+        //    (page) => page + 1
+        //  );
+
+        setTotalItems(totalPage);
       })
       .catch((err) => {
         console.log(err)
@@ -34,7 +38,8 @@ const FullCategory = ({ setactive, id, setCatId}) => {
     }
 
     eventCats()
-  },[])
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[page])
   return (
     <div className="let swipeIn space-y-6 sm:space-y-8">
       <div className="space-x-2 items-center flex">
@@ -88,6 +93,34 @@ const FullCategory = ({ setactive, id, setCatId}) => {
             </div>
           );
         })}
+
+<div className="flex col-span-full py-2 sm:py-4 w-full my-3 justify-between items-center">
+                {currentPage > 1 ? (
+                  <button
+                    onClick={() => {
+                      setPage(page - 1);
+                    }}
+                    className="bg-white text-black rounded-sm px-4 py-2"
+                  >
+                    Previous
+                  </button>
+                ) : (
+                  <div className="w-1 h-1"></div>
+                )}
+                <p className="text-white">{`page ${currentPage} of ${totalItems}`}</p>
+                {currentPage === totalItems ? (
+                  <div className="w-1 h-1"></div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setPage(page + 1);
+                    }}
+                    className="bg-[#FD6EBB] text-white rounded-sm px-4 py-2"
+                  >
+                    Next
+                  </button>
+                )}
+              </div>
       </div>
     </div>
   );

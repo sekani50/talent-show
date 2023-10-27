@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const Participants = ({ setactive, setfiltercat, id }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { token } = useSelector((state) => state.user);
   const [allcat, setallCat] = useState([]);
   const [data, setdata] = useState([]);
   const [loading, setloading] = useState(false);
@@ -38,6 +37,7 @@ const Participants = ({ setactive, setfiltercat, id }) => {
     }
 
     allParticipant();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

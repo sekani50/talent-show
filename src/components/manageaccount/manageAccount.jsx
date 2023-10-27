@@ -22,7 +22,7 @@ const ManageAccount = () => {
     const dispatch = useDispatch()
     const [image, setImage] = useState(currentUser?.profileImage?.url || "")
     const [upload, setUpload] = useState(currentUser?.profileImage)
-    const [isEdit, setEdit] = useState(false);
+    const [, setEdit] = useState(false);
     const [userstat, setstat] = useState(null)
     const [event, setEvent] = useState([])
    function logOut() {
@@ -70,6 +70,7 @@ const ManageAccount = () => {
 
       }
       getDetails()
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
         <div className='w-full overflow-x-hidden '>

@@ -26,7 +26,7 @@ const OnBoarding = () => {
   const navigate = useNavigate();
   const [checkprofile, setcheckprofile] = useState(false);
   const { token, currentUser } = useSelector((state) => state.user);
-  const [redirect, setredirect] = useState(null);
+  const [redirect,] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState("");
 
   console.log(state);
@@ -34,6 +34,7 @@ const OnBoarding = () => {
     if (redirect) {
       window.location.href = redirect;
     }
+    // eslint-disable-next-line
   }, []);
   async function handleSubmit() {
     console.log(uploadedVideo);

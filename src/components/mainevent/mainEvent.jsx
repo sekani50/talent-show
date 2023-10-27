@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import AboutEvent from "./tabs/aboutEvent";
-import Participants from "./tabs/participant";
+//import Participants from "./tabs/participant";
 import FullCategory from "./tabs/fullCategory";
 import CategroyDetail from "./tabs/categoryDetail";
 
 const MainEvent = ({ event, id }) => {
   const [active, setactive] = useState(0);
   const [catId, setcatId] = useState('')
-  const [filtercat, setfiltercat] = useState("");
+
   return (
     <div className="w-full py-6 px-4 sm:px-20 space-y-6 sm:space-y-8 sm:py-8">
       {active < 3 && (
@@ -67,13 +67,14 @@ const MainEvent = ({ event, id }) => {
         <FullCategory
           event={event}
           id={id}
-          filtercat={filtercat}
+        
           setactive={setactive}
           setCatId={setcatId}
         />
       )}
       {active === 3 && <CategroyDetail
       setactive={setactive}
+      eventId={event?._id}
       id={catId}
       />}
     </div>
