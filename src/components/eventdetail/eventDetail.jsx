@@ -18,7 +18,7 @@ const EventDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [menu, showmenu] = useState(false);
-const {token, currentUser} = useSelector((state) => state.user)
+const {authtoken, currentUser} = useSelector((state) => state.user)
 const [event, setevent]  = useState(null)
   useEffect(() => {
     async function getEvent() {
@@ -38,7 +38,7 @@ const [event, setevent]  = useState(null)
 
   function joinEvent(id, eventName,categories ) {
     if(!event) return
-    if (!token) {
+    if (!authtoken) {
       toast.error("Log in or register to join the event");
       return;
     }

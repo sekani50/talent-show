@@ -18,7 +18,7 @@ const Events = () => {
   const [loading, setloading] = useState(false);
 
     
-  const {token,currentUser} = useSelector((state) => state.user)
+  const {authtoken,currentUser} = useSelector((state) => state.user)
   // const [currentPage, setcurrentPage] = useState(0);
   useEffect(() => {
     async function loadevents() {
@@ -41,7 +41,7 @@ const Events = () => {
   }, []);
 
   function joinEvent(id, eventName, categories) {
-    if (!token) {
+    if (!authtoken) {
       toast.error("Log in or register to join the event");
       return;
     }

@@ -5,7 +5,7 @@ import { voting } from "../../../Utils/api";
 import { toast } from "react-hot-toast";
 import { LoaderIcon } from "lucide-react";
 const VotingForm = ({ eventId, userId }) => {
-  const { token } = useSelector((state) => state.user);
+  const { authtoken } = useSelector((state) => state.user);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhone] = useState("");
@@ -27,7 +27,7 @@ const VotingForm = ({ eventId, userId }) => {
       }
     }
     setloading(true);
-    await voting(token, eventId, userId, payload)
+    await voting(authtoken, eventId, userId, payload)
       .then((res) => {
         console.log(res);
         setloading(false);

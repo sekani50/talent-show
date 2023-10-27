@@ -9,7 +9,7 @@ import { MdNavigateBefore } from "react-icons/md";
 import { useSelector } from "react-redux";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const { token } = useSelector((state) => state.user);
+  const { authtoken } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
 
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
       return;
     }
     setloading(true);
-    await sendMail(token, payload)
+    await sendMail(authtoken, payload)
       .then((res) => {
         console.log(res.data.message);
         toast.success(res.data.message);

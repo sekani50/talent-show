@@ -10,7 +10,7 @@ import { LoaderIcon } from "lucide-react";
 import { toast } from "react-hot-toast";
 import DropDowns from "../composable/dropDowns";
 const UpdateAccount = ({ upload }) => {
-  const { token, currentUser } = useSelector((state) => state.user);
+  const { authtoken, currentUser } = useSelector((state) => state.user);
   const [phone, setPhone] = useState(currentUser?.phoneNumber);
   const [firstName, setName] = useState(currentUser?.firstName);
   const [loading, setloading] = useState(false);
@@ -36,9 +36,9 @@ const UpdateAccount = ({ upload }) => {
     async function getAllDropDowns() {
       try {
         const [allTalent, allCountries] = await Promise.all([
-          getTalents(token),
+          getTalents(authtoken),
          
-          getCountries(token),
+          getCountries(authtoken),
         ]);
         console.log(allTalent,  allCountries);
         getAvailableDropDowns({
@@ -55,7 +55,7 @@ const UpdateAccount = ({ upload }) => {
 
   useEffect(() => {
     async function getDetails() {
-      await getUsers(token)
+      await getUsers(authtoken)
         .then((res) => {
           //console.log(res)
           const { data } = res.data;
@@ -74,7 +74,7 @@ const UpdateAccount = ({ upload }) => {
     const formdatas = new FormData();
     formdatas.append("image", upload);
 
-    await imageUpload(token, formdatas)
+    await imageUpload(authtoken, formdatas)
       .then((res) => {
         console.log(res);
         //setIsImage(true);
@@ -104,7 +104,7 @@ const UpdateAccount = ({ upload }) => {
         await axios
           .put(`/user/update-profile`, payload, {
             headers: {
-              Authorization: "Bearer " + token,
+              Authorization: "Bearer " + authtoken,
             },
           })
           .then((res) => {

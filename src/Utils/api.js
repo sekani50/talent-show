@@ -2,10 +2,10 @@ import axios from "./useAxios";
 
 //vote
 
-export const voting = (token, eventId, participantId, payload) => {
+export const voting = (authtoken, eventId, participantId, payload) => {
   return axios.post(`/events/vote/${eventId}/${participantId}`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
@@ -18,37 +18,37 @@ export const contactUs = (payload) => {
   return axios.post(`/contact`, payload);
 };
 //////
-export const onboarding = (token, payload) => {
+export const onboarding = (authtoken, payload) => {
   return axios.put(`/user/onboarding`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
 
 ///
-export const getUsers = (token) => {
+export const getUsers = (authtoken) => {
   return axios.get(`/auth/me`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
 
 // /password/change
-export const changePassword = (token, payload) => {
+export const changePassword = (authtoken, payload) => {
   return axios.put(`/password/change`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
 
 // /password/forgot
-export const sendMail = (token, payload) => {
+export const sendMail = (authtoken, payload) => {
   return axios.post(`/password/forgot`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
@@ -64,39 +64,39 @@ export const singleEvent = (id) => {
 };
 
 ///events/:eventId
-export const contest = (id, payload, token) => {
+export const contest = (id, payload, authtoken) => {
   return axios.post(`/events/join/${id}`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
 
 ////user/update-profile /user/update-profile
-export const updateProfile = (token, payload) => {
+export const updateProfile = (authtoken, payload) => {
   return (
     axios.put(`/user/update-profile`, payload),
     {
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: "Bearer " + authtoken,
       },
     }
   );
 };
 
-export const imageUpload = (token, payload) => {
+export const imageUpload = (authtoken, payload) => {
   return axios.post(`/upload-image`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
 
 ///upload-video
-export const videoUpload = (token, payload) => {
+export const videoUpload = (authtoken, payload) => {
   return axios.post(`/upload-video`, payload, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
@@ -107,10 +107,10 @@ export const eventParticipants = (eventId) => {
 };
 
 ////user/participants/:userId
-export const singleParticipant = (token, eventId, userId) => {
+export const singleParticipant = (authtoken, eventId, userId) => {
   return axios.get(`/events/${eventId}/participants/${userId}`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 };
@@ -133,18 +133,18 @@ export function categoryParticipants(catId, page) {
   return axios.get(`/categories/${catId}/participants?page=${page}`);
 }
 
-export function getTalents(token) {
+export function getTalents(authtoken) {
   return axios.get(`/talents/`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 }
 
-export function getCountries(token) {
+export function getCountries(authtoken) {
   return axios.get(`/countries`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + authtoken,
     },
   });
 }

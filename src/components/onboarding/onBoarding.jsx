@@ -25,7 +25,7 @@ const OnBoarding = () => {
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
   const [checkprofile, setcheckprofile] = useState(false);
-  const { token, currentUser } = useSelector((state) => state.user);
+  const { authtoken, currentUser } = useSelector((state) => state.user);
   const [redirect,] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState("");
 
@@ -42,7 +42,7 @@ const OnBoarding = () => {
     setloading(true);
     const formdatas = new FormData();
     formdatas.append("video", uploadedVideo);
-    await videoUpload(token, formdatas)
+    await videoUpload(authtoken, formdatas)
       .then((res) => {
         console.log(res);
         videoUrl = res.data.data;
@@ -75,7 +75,7 @@ const OnBoarding = () => {
 
     
      if ( videoUrl) { 
-        await contest(state?.data?.id, payload, token)
+        await contest(state?.data?.id, payload, authtoken)
           .then((res) => {
             toast.success("Successfully onboard");
             console.log(res.data);

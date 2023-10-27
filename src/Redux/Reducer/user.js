@@ -2,14 +2,14 @@ import * as type from "../Actions/Types";
 
 const initailState = {
   currentUser: null,
-  token: "",
+  authtoken: "",
 };
 const User = (state = initailState, action) => {
   switch (action.type) {
     case type.LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.payload,
+        authtoken: action.payload,
       };
     case type.FETCH_USER_SUCCESS:
       return {
@@ -21,7 +21,7 @@ const User = (state = initailState, action) => {
       return {
         ...state,
         currentUser: null,
-        token: "",
+        authtoken: "",
       };
 
     default:

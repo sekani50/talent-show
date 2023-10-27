@@ -22,11 +22,11 @@ const Voting = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [menu, showmenu] = useState(false);
-  const { token } = useSelector((state) => state.user);
+  const { authtoken } = useSelector((state) => state.user);
   const [data, setdata] = useState([]);
   useEffect(() => {
     async function getParticipant() {
-      await singleParticipant(token, state?.eventId, id)
+      await singleParticipant(authtoken, state?.eventId, id)
         .then((res) => {
           console.log(res);
           const { data } = res.data;

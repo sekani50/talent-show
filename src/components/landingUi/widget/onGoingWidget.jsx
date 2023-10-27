@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 const OnGoingWidget = ({ j, image, eventName, id, categories }) => {
-  const { token } = useSelector((state) => state.user);
+  const { authtoken } = useSelector((state) => state.user);
   const navigate = useNavigate();
   function joinEvent(id, eventName, categories) {
-    if (!token) {
+    if (!authtoken) {
       toast.error("Log in or register to join the event");
       return;
     }

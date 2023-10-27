@@ -15,7 +15,7 @@ import { useEffect } from 'react'
 import { getUsers } from '../../Utils/api'
 import { GetUsersSuccess } from '../../Redux/Actions/ActionCreators'
 const ManageAccount = () => {
-  const {token, currentUser} = useSelector((state) => state.user)
+  const {authtoken, currentUser} = useSelector((state) => state.user)
     const [active, setactive] = useState(0)
     const [portfolio, setPortfolio] = useState(currentUser?.portfolio || "")
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ const ManageAccount = () => {
   };
     useEffect(() => {
       async function getDetails() {
-        await getUsers(token)
+        await getUsers(authtoken)
         .then((res) => {
          // console.log(res.data.data)
           const {data} = res.data

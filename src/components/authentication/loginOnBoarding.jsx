@@ -35,7 +35,7 @@ const LoginOnBoarding = () => {
   const [activeTalent, setActiveTalent] = useState("Select a talent");
   const [activeTalentId, setActiveTalentId] = useState("");
 
-  const { token } = useSelector((state) => state.user);
+  const { authtoken } = useSelector((state) => state.user);
   const categories = [
     "To build career",
     "Get recognition",
@@ -47,8 +47,8 @@ const LoginOnBoarding = () => {
     async function getAllDropDowns() {
       try {
         const [allTalent, allCountries] = await Promise.all([
-          getTalents(token),
-          getCountries(token),
+          getTalents(authtoken),
+          getCountries(authtoken),
         ]);
         console.log(allTalent, allCountries);
         getAvailableDropDowns({
@@ -67,7 +67,7 @@ const LoginOnBoarding = () => {
     const formdatas = new FormData();
     formdatas.append("image", uploadId);
     setLoading(true);
-    await imageUpload(token, formdatas)
+    await imageUpload(authtoken, formdatas)
       .then((res) => {
         console.log(res);
         docUrl = res.data.data;
@@ -99,7 +99,7 @@ const LoginOnBoarding = () => {
     setLoading(true);
   if ( docUrl )  {
      
-        await onboarding(token, payload)
+        await onboarding(authtoken, payload)
           .then((res) => {
             console.log(res);
             setLoading(false);
