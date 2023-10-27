@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import MainEvent from "../mainevent/mainEvent";
 import { toast } from "react-hot-toast";
 import axios from "../../Utils/useAxios";
@@ -11,34 +11,28 @@ const Ongoing = () => {
   const [data, setdata] = useState([]);
   const { token } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const [active, setactive] = useState('')
-
-
+  const [active, setactive] = useState("");
 
   useEffect(() => {
-    if (!data) return
-    const cards = document.querySelectorAll('.card')
-    const observer = new IntersectionObserver(entries => {
+    if (!data) return;
+    const cards = document.querySelectorAll(".card");
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         //setactive(index)
-        entry.target.classList.toggle("show", entry.isIntersecting)
-      })
-    })
-  
-    cards.forEach((card => {
-      observer.observe(card)
-    }))
-  
-  },[data])
+        entry.target.classList.toggle("show", entry.isIntersecting);
+      });
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  }, [data]);
 
   useEffect(() => {
-    if(!data) return
-    const visiblecards = document.querySelectorAll('.show')
-    console.log(visiblecards?.length)
-
-  },[data])
-
- 
+    if (!data) return;
+    const visiblecards = document.querySelectorAll(".show");
+    console.log(visiblecards?.length);
+  }, [data]);
 
   useEffect(() => {
     async function loadevents() {
@@ -73,27 +67,26 @@ const Ongoing = () => {
     });
   }
   return (
-    <div className="bg-main px-4 sm:px-20 py-6 space-y-6 sm:space-y-14 text-white">
-      <h1 className="text-center text-lg sm:text-2xl font-semibold">
+    <div className="bg-main px-4 sm:px-20 py-6 space-y-6 sm:space-y-14 ">
+      <h1 className="text-center text-white text-lg sm:text-2xl font-semibold">
         Ongoing Events
       </h1>
 
-      <div className="text-white  mx-auto space-y-4 flex flex-col items-center w-fit h-fit ">
-          <p className="font-bold text-lg sm:text-3xl">{data?.eventName || ''}</p>
-          <p className="text-center">A show brought to you by NextGen</p>
-          <button
-            onClick={() => {
-              joinEvent(data?._id, data?.eventName, data?.categories)
-            }}
-            className="text-[#017297] bg-white rounded-sm px-4 sm:px-8 py-2"
+      <div className="w-full h-fit flex  justify-center items-center sm:justify-end sm:items-end">
+        <div className="w-[95%] sm:w-[450px] h-[200px] relative sm:h-[400px] rounded-lg">
+          <img
+            src={data?.coverImage?.url}
+            alt=""
+            className="w-full h-full object-cover rounded-lg"
+          />{" "}
+          <Link
+            to="/event"
+            className="px-4 absolute bottom-3 right-3 py-2 sm:py-3 bg-white sm:px-6 rounded-3xl text-center"
           >
-            Join as a Contestant
-          </button>
-          <p className="text-center text-[#FFCC15]">
-          {`  Registration Ends by ${formatDate(data?.contestEnd).month || ''} ${formatDate(data?.contestEnd).year || ''}`}
-          </p>
+            View Event
+          </Link>
         </div>
-          <MainEvent event={data} id={data?._id}/>
+      </div>
     </div>
   );
 };

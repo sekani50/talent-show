@@ -17,10 +17,10 @@ import { GetUsersSuccess } from '../../Redux/Actions/ActionCreators'
 const ManageAccount = () => {
   const {token, currentUser} = useSelector((state) => state.user)
     const [active, setactive] = useState(0)
-    const [portfolio, setPortfolio] = useState(currentUser?.portfolio)
+    const [portfolio, setPortfolio] = useState(currentUser?.portfolio || "")
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [image, setImage] = useState(currentUser?.profileImage?.url)
+    const [image, setImage] = useState(currentUser?.profileImage?.url || "")
     const [upload, setUpload] = useState(currentUser?.profileImage)
     const [isEdit, setEdit] = useState(false);
     const [userstat, setstat] = useState(null)
@@ -123,7 +123,7 @@ const ManageAccount = () => {
                 </div>
                 <div className='space-y-1'>
                     <p className='font-medium'>{`${currentUser?.firstName || '_'} ${currentUser?.lastName || '_'}`}</p>
-                    <p className='text-sm sm:text-[13px]'>{currentUser?.talent || ''}</p>
+                    <p className='text-sm sm:text-[13px]'>{currentUser?.talent?.name || ''}</p>
 
                 </div>
 
@@ -147,7 +147,7 @@ const ManageAccount = () => {
                   }}
                 />
               </div>
-              <button className='w-full bg-black text-white py-2 text-center'>View Public Profile</button>
+              <button className='hidden w-full bg-black text-white py-2 text-center'>View Public Profile</button>
                 </div> 
 
                 <div className='w-full  items-center justify-center my-3 flex'>
@@ -180,7 +180,7 @@ const ManageAccount = () => {
           onClick={() => {
             setactive(1);
           }}
-          className={`flex space-x-2 sm:space-x-3 py-2 cursor-pointer ${
+          className={`hidden space-x-2 sm:space-x-3 py-2 cursor-pointer ${
             active === 1
               ? " font-medium border-b-2 border-[#017297]"
               : "text-gray-400"

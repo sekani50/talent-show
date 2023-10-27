@@ -35,7 +35,6 @@ export const getUsers = (token) => {
   });
 };
 
-
 // /password/change
 export const changePassword = (token, payload) => {
   return axios.put(`/password/change`, payload, {
@@ -48,15 +47,6 @@ export const changePassword = (token, payload) => {
 // /password/forgot
 export const sendMail = (token, payload) => {
   return axios.post(`/password/forgot`, payload, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-};
-
-////events/upload-in-action-video
-export const actionVideo = (token, form) => {
-  return axios.post(`/upload-video`, form, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -84,12 +74,15 @@ export const contest = (id, payload, token) => {
 
 ////user/update-profile /user/update-profile
 export const updateProfile = (token, payload) => {
-  return axios.put(`/user/update-profile`, payload), {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  }
-} 
+  return (
+    axios.put(`/user/update-profile`, payload),
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+};
 
 export const imageUpload = (token, payload) => {
   return axios.post(`/upload-image`, payload, {
@@ -99,31 +92,59 @@ export const imageUpload = (token, payload) => {
   });
 };
 
+///upload-video
+export const videoUpload = (token, payload) => {
+  return axios.post(`/upload-video`, payload, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
 
 ///events/:eventID/participants?page=1 /events/:eventID/participants
-export const eventParticipants =(eventId) => {
-  return axios.get(`/events/${eventId}/participants`)
-}
+export const eventParticipants = (eventId) => {
+  return axios.get(`/events/${eventId}/participants`);
+};
 
-////user/participants/:userId 
-export const singleParticipant = (token,eventId, userId) => {
+////user/participants/:userId
+export const singleParticipant = (token, eventId, userId) => {
   return axios.get(`/events/${eventId}/participants/${userId}`, {
     headers: {
       Authorization: "Bearer " + token,
     },
-  })
-}
+  });
+};
 
 ///
 export const onGoing = () => {
-  return axios.get("/events/ongoing-events")
-}
+  return axios.get("/events/ongoing-events");
+};
 
 export function eventCategories(eventId, page) {
-  return axios.get(`/categories/event/${eventId}?page=${page}`)
+  return axios.get(`/categories/event/${eventId}?page=${page}`);
 }
 
-
 export function singleCategory(catId) {
-  return axios.get(`/categories/${catId}`)
+  return axios.get(`/categories/${catId}`);
+}
+
+///categories/:categoryID/participants
+export function categoryParticipants(catId, page) {
+  return axios.get(`/categories/${catId}/participants?page=${page}`);
+}
+
+export function getTalents(token) {
+  return axios.get(`/talents/`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+}
+
+export function getCountries(token) {
+  return axios.get(`/countries`, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
 }

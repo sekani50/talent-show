@@ -24,7 +24,8 @@ const MainEvent = ({ event, id }) => {
           >
             About Events
           </div>
-          <div
+        {/**
+           <div
             onClick={() => {
               setactive(1);
             }}
@@ -36,6 +37,7 @@ const MainEvent = ({ event, id }) => {
           >
             Participants
           </div>
+         */}
 
           <div
             onClick={() => {
@@ -53,14 +55,14 @@ const MainEvent = ({ event, id }) => {
       )}
 
       {active === 0 && <AboutEvent event={event} />}
-      {active === 1 && (
+      {/*active === 1 && (
         <Participants
           event={event}
           id={id}
           setfiltercat={setfiltercat}
           setactive={setactive}
         />
-      )}
+      )*/}
       {active === 2 && (
         <FullCategory
           event={event}

@@ -8,7 +8,7 @@ import Footer from "../footer/footer";
 import UploadingImage from "./uploadingImage";
 import pay from "../../assets/png/pay.png";
 import next from "../../assets/png/next.png";
-import { actionVideo, contest } from "../../Utils/api";
+import { contest, videoUpload } from "../../Utils/api";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import { LoaderIcon } from "lucide-react";
@@ -16,14 +16,12 @@ import user from "../../assets/png/customerpic.png";
 const OnBoarding = () => {
   const { state, pathname } = useLocation();
   const [loading, setloading] = useState(false);
-  const [selectCategory, setSelectCategory] = useState("");
   const [menu, showmenu] = useState(false);
   const [email, setEmail] = useState("");
   const [portfolio, setPortfolio] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [category, setCategory] = useState("");
-  const [subcat, setSubCat] = useState("");
+
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
   const [checkprofile, setcheckprofile] = useState(false);
@@ -31,6 +29,7 @@ const OnBoarding = () => {
   const [redirect, setredirect] = useState(null);
   const [uploadedVideo, setUploadedVideo] = useState("");
 
+  console.log(state);
   useEffect(() => {
     if (redirect) {
       window.location.href = redirect;
@@ -38,32 +37,50 @@ const OnBoarding = () => {
   }, []);
   async function handleSubmit() {
     console.log(uploadedVideo);
+    let videoUrl;
     setloading(true);
+    const formdatas = new FormData();
+    formdatas.append("video", uploadedVideo);
+    await videoUpload(token, formdatas)
+      .then((res) => {
+        console.log(res);
+        videoUrl = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        setloading(false);
+        toast.error("Video not uploaded. Try again");
+      });
 
-    const formdata = new FormData();
+    let payload;
+
     if (checkprofile) {
-      formdata.append("useAsOnProfile", checkprofile);
-      formdata.append("category", category);
-      formdata.append("in_action_video", uploadedVideo);
+      payload = {
+        useAsOnProfile: checkprofile,
+        inActionVideo: videoUrl,
+        talentId: currentUser?.talent?._id,
+      };
     } else {
-      formdata.append("useAsOnProfile", checkprofile);
-      formdata.append("fullName", name);
-      formdata.append("email", email);
-      formdata.append("phoneNumber", phone);
-      formdata.append("portfolio", portfolio);
-      formdata.append("category", category);
-      formdata.append("in_action_video", uploadedVideo);
+      payload = {
+        useAsOnProfile: checkprofile,
+        fullName: name,
+        email: email,
+        talentId: currentUser?.talent?._id,
+        phoneNumber: phone,
+        portfolio: portfolio,
+        inActionVideo: videoUrl,
+      };
     }
 
     {
-      uploadedVideo &&
-        (await contest(state?.data?.id, formdata, token)
+      videoUrl &&
+        (await contest(state?.data?.id, payload, token)
           .then((res) => {
             toast.success("Successfully onboard");
             console.log(res.data);
             setloading(false);
             //setredirect(res.data);
-             window.location.href=res.data
+            window.location.href = res.data;
           })
           .catch((err) => {
             console.log(err);
@@ -163,7 +180,7 @@ const OnBoarding = () => {
           </div>
         </div>
 
-        <div className="mb-3 border-b py-2 flex items-center w-full">
+        <div className="mb-3 border-b py-2 justify-center flex items-center w-full">
           <div className={`flex space-x-3 items-center `}>
             <div
               className={`w-6 h-6 text-xs flex items-center justify-center rounded-full px-3 py-1 ${
@@ -209,25 +226,6 @@ const OnBoarding = () => {
               }`}
             >
               3
-            </div>
-            <div
-              className={`w-[28px] sm:w-[50px] h-2  rounded-l-lg ${
-                active >= 2 ? "bg-[#017297]" : "bg-gray-300"
-              }`}
-            ></div>
-          </div>
-          <div className="flex space-x-3 items-center">
-            <div
-              className={`w-[28px] sm:w-[50px] h-2  rounded-r-lg ${
-                active === 3 ? "bg-[#017297]" : "bg-gray-300"
-              }`}
-            ></div>
-            <div
-              className={`w-6 h-6 text-xs flex items-center justify-center rounded-full px-3 py-1 ${
-                active === 3 ? "text-white bg-[#017297]" : "bg-gray-200"
-              }`}
-            >
-              4
             </div>
           </div>
         </div>
@@ -326,61 +324,9 @@ const OnBoarding = () => {
 
         {active === 1 && (
           <div>
-            <div className="form-group space-y-4 w-full mb-3">
-              <label
-                className="block text-lg sm:text-xl font-semibold "
-                htmlFor="text"
-              >
-                Add Category
-              </label>
-              <div className="flex flex-col space-y-3 text-[#017297]  justify-start items-start">
-                {state?.data?.categories?.map((type, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="border w-full hover:bg-[#017297] hover:bg-opacity-30 border-[#017297] rounded-sm p-2 sm:p-3"
-                    >
-                      <label
-                        onClick={() => {
-                          setSelectCategory(index);
-                          setCategory(type);
-                        }}
-                        key={index}
-                        className="container w-full"
-                      >
-                        {type}
-                        <input
-                          onChange={(e) => e.target.value}
-                          type="checkbox"
-                          checked={index === selectCategory}
-                        />
-                        <span className="checkmark"></span>
-                      </label>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="hidden form-group space-y-4 w-full mb-3">
-              <label
-                className="block text-lg sm:text-xl font-semibold "
-                htmlFor="text"
-              >
-                Add Sub Category
-              </label>
-              <input
-                className="block form__input border border-gray-200 focus:border-gray-500 hover:border-gray-500 rounded-sm focus:outline-none w-full h-11 px-4"
-                type="email"
-                placeholder="female or female, male, adult"
-                name="email"
-                value={subcat}
-                onChange={(e) => {
-                  setSubCat(e.target.value);
-                }}
-              />
-            </div>
+            <UploadingImage setUploadedImage={setUploadedVideo} />
 
-            <div className="w-full items-center flex justify-between">
+            <div className="w-full my-3 items-center flex justify-between">
               <button
                 onClick={() => {
                   setActive(0);
@@ -401,30 +347,6 @@ const OnBoarding = () => {
           </div>
         )}
         {active === 2 && (
-          <div>
-            <UploadingImage setUploadedImage={setUploadedVideo} />
-
-            <div className="w-full my-3 items-center flex justify-between">
-              <button
-                onClick={() => {
-                  setActive(1);
-                }}
-                className="w-fit px-8 py-2 border border-[#017297] rounded-sm text-[#017297]"
-              >
-                Previous Step
-              </button>
-              <button
-                onClick={() => {
-                  setActive(3);
-                }}
-                className="w-fit px-8 py-2 bg-[#017297] rounded-sm text-white"
-              >
-                Next Step
-              </button>
-            </div>
-          </div>
-        )}
-        {active === 3 && (
           <div className="w-full space-y-3 items-center justify-center flex flex-col">
             <img src={pay} alt="" />
             <div className="font-semibold text-lg">Proceed to payment</div>
@@ -448,7 +370,7 @@ const OnBoarding = () => {
             </button>
             <button
               onClick={() => {
-                setActive(0);
+                setActive(1);
               }}
               className="text-[#017297]"
             >

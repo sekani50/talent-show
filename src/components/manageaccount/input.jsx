@@ -3,7 +3,7 @@ import React from 'react'
 const Input = ({value, setValue, type, label}) => {
     return (
         <div className="form-group space-y-4 w-full mb-3">
-        <label className="block " htmlFor={type}>
+        <label className="block font-semibold" htmlFor={type}>
           {label}
         </label>
         <input

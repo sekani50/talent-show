@@ -38,7 +38,7 @@ const LoginAction = (loginParams, navigate, setLoading) => {
         const { accessToken, user } = res.data.data;
         dispatch(GetUsersSuccess(user));
         dispatch(loginSuccess(accessToken.token));
-        if (user.stageName) {
+        if (user.isOnboard) {
           navigate("/");
         }
         else {
@@ -59,7 +59,7 @@ const LoginAction = (loginParams, navigate, setLoading) => {
           toast.error("Network Error");
         }
         const {error:err} = error.response.data
-        if(err) {
+        if(typeof err === "string") {
           toast.error(err.message)
         }
         const { message } = error.response.data.error;
@@ -87,9 +87,9 @@ const registration = (registrationParams, navigate, setLoading) => {
       .then((res) => {
         console.log(res.data);
 
-        dispatch(GetUsersSuccess(res.data));
-        dispatch(loginSuccess(res.data.token));
-        toast.success("Registration Successful");
+        dispatch(GetUsersSuccess(res.data.data));
+        dispatch(loginSuccess(res.data.data.token));
+        toast.success(res.data.message);
         navigate("/login");
         setLoading(false);
       })
